@@ -1,7 +1,6 @@
-
 // 这是一个配置文件，起始就是一个JS文件，通过Node中的模块操作，向外暴露了一个 配置对象
 const path = require('path');
-const webpack = require('webpack')//启用热更新第二步
+const webpack = require('webpack') //启用热更新第二步
 
 //导入html-weback-plugin插件 在内存中生存html页面的插件
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -16,33 +15,49 @@ module.exports = {
 
     entry: {
         entry: './src/main.js'
-    },//指定打包文件
+    }, //指定打包文件
     output: {
-        path: path.resolve(__dirname, 'dist'),//指定打包输入文件
+        path: path.resolve(__dirname, 'dist'), //指定打包输入文件
         filename: 'bundle.js'
     },
     devServer: {
         //这是配置dev-server 命令参数的第二种形式，此方式相对麻烦些
-        open: true,//自动打开浏览器
-        port: 8080,//设置启动时运行端口
+        open: true, //自动打开浏览器
+        port: 8080, //设置启动时运行端口 
         //指定托管的根目录
-        hot: true//启用热更新第一步
-    },
+        hot: true, //启用热更新第一步 
+        publicPath: '/',
+        proxy: {
+            '/api': {
+                target: "https://uploadbeta.com", // 需要跨域访问的地址
+                changeOrigin: true, // 必须要加，否则访问的是自己
+                secure: false
+            },  
+            '/random': {
+                target: "https://source.unsplash.com", // 需要跨域访问的地址
+                changeOrigin: true, // 必须要加，否则访问的是自己
+                secure: false 
+            },  
+            
+
+        },    
+ 
+    },  
     plugins: [
         //配置插件的节点
         new webpack.HotModuleReplacementPlugin(), //new一个热更新的模块对象，这是启用热跟新的第三步
         new htmlWebpackPlugin({
             //创建一个在内存中生成html页面的插件
             //htmlWebpackPlugin
-            template: path.join(__dirname, './src/index.html'),//指定模板页面，将来根据路径生成指定的内存中的模板页面
+            template: path.join(__dirname, './src/index.html'), //指定模板页面，将来根据路径生成指定的内存中的模板页面
             filename: 'index.html'
         }),
         new VueLoaderPlugin(),
-        
+
     ],
     module: {
         //这个节点，用于配置所有第三方模块加载器
-        rules: [//所有第三方模块的匹配规则
+        rules: [ //所有第三方模块的匹配规则
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
@@ -52,12 +67,33 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'less-loader']
             },
             {
+                test: /\.sass$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            implementation: require('sass'),
+                            fiber: require('fibers'),
+                            indentedSyntax: true // optional
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                use: [{
+                    loader: "style-loader" // 将 JS 字符串生成为 style 节点
+                }, {
+                    loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
+                }, {
+                    loader: "sass-loader" // 将 Sass 编译成 CSS
+                }]
             },
             {
                 test: /\.(jpg|png|gif|bmp|jpeg)$/,
-                use: 'url-loader?limit=8294454&name=[name].[ext]'//处理图片路径的loader ?后传参 limit
+                use: 'url-loader?limit=8294454&name=[name].[ext]' //处理图片路径的loader ?后传参 limit
                 //limit 给定的值是图片的大小 单位byte，如果图片大小大于或等于给定的limit值则不会被转换为base64格式的字符串，反之
                 //name
             },
@@ -75,6 +111,7 @@ module.exports = {
                 use: 'vue-loader'
             }
 
+
         ]
     },
     resolve: {
@@ -82,6 +119,9 @@ module.exports = {
             "vue$": 'vue/dist/vue.js'
         }
     }
+
+
+
 }
 // 当在控制台直接输入webpack命令时 webpack做了以下几个步骤
 //1. 首先 webpack 发现并没有通过命令的形式指定入口与出口
