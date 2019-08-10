@@ -21,11 +21,12 @@ export default {
     };
   },
   created() {
-    // this.getFirstImg();
-    //  this.getSecondImg();
-    this.getThirdImg();
+    this.getFirstImg();
+     this.getSecondImg();
+     
     
-  },
+    
+  }, 
   methods: {
     getFirstImg() {
      
@@ -57,16 +58,16 @@ export default {
     },
     getThirdImg() {
       
-      this.axios.get("random").then(result => { 
+       this.axios.get("api/pictures/random/?key=flower").then(result => {
         console.log(result);
         if (result.statusText == "OK") {
-          // this.url = "https://uploadbeta.com/" + result.config.url;
+          this.url = "https://uploadbeta.com/" + result.config.url;
           // this.url = this.swipeList
           this.imgList.push(this.url);
           
         } else {
           Toast("加载轮播图失败");
-        } 
+        }
       });
     },
 
