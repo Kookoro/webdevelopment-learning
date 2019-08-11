@@ -2,8 +2,9 @@
   <div class="app-container">
      <div>
    <v-app-bar
-      color="#4e6ba8"
-      
+      color="#725a9c"
+      height="50px"
+      hide-on-scroll
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -90,7 +91,7 @@ export default {
   overflow-x: hidden;
 }
 .mint-header {
-  background-color: #4e6ba8; 
+  background-color: #725a9c; 
 }
 .footer {
   position: fixed;

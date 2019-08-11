@@ -17,7 +17,7 @@
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
           <v-icon class="fontsetsize">mdi-share-variant</v-icon>
-          <div class="mui-media-body">图片分享</div>
+          <div class="mui-media-body">图片分享</div> 
         </a>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -47,6 +47,27 @@
     </ul>
     <button @click="show">查询天气</button>
     <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+        <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+        <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+        <br />
     <br />
     <br />
     <br />
