@@ -24,8 +24,9 @@ Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 import 'mint-ui/lib/style.css'
 //导入mui 
-// import '../src/lib/mui/css/mui.min.css'
-
+import '../src/lib/mui/css/mui.min.css'
+ 
+import '../src/lib/EVA-icons/css/eva-icon.css'
 //导入Vuetify ui框架
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)
@@ -35,18 +36,22 @@ export default new Vuetify({
         iconfont: 'mdiSvg', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
     },
 })
-
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload,{   
+    preLoad:1,
+    loading:'../src/images/loading.gif'
+});
 //导入vue-router路由
 import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
+Vue.use(VueRouter);
+ 
 //导入router.js
 import router from './router.js';
 
 //导入axios插件
 import axios from 'axios';
 Vue.prototype.axios = axios;
- 
+
 const vm = new Vue({
     el: '#app',
     

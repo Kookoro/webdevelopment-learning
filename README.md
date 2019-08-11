@@ -10,6 +10,7 @@
 ## 制作首页app组件
 
 1.完成header区域，采用mint-ui组件
-2.制作底部Tabbar区域，采用了～～mui～～ => Vuetify 
+2.制作底部Tabbar区域，采用了~~mui~~ => Vuetify 
 
 3.在中间区域放置router-view展示路由匹配到的组件 
+  

@@ -1,7 +1,25 @@
 <template>
   <div class="app-container">
-    <mt-header fixed title="项目名称"></mt-header>
-    <router-view></router-view>
+     <div>
+   <v-app-bar
+      color="#4e6ba8"
+      
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-toolbar-title>Page title</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      
+    </v-app-bar>
+  </div>
+    <!-- <mt-header fixed title="项目名称"></mt-header> -->
+    <transition name="fade">
+      <keep-alive>
+       <router-view></router-view>
+      </keep-alive> 
+    </transition>
     <!-- <nav class="mui-bar mui-bar-tab">
       <a class="mui-tab-item mui-active" href="#tabbar">
         <span class="mui-icon mui-icon-home"></span>
@@ -68,21 +86,33 @@ export default {
  
 <style scoped>
 .app-container {
-  padding-top: 40px;
+  
+  overflow-x: hidden;
 }
 .mint-header {
-  background-color: #7659a0;
+  background-color: #4e6ba8; 
 }
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
 }
-.v-btn {
-  background-color: #7659a0;
-}
+
 .reset-height {
   height: 100%;
+}
+.fade-enter{
+  opacity: 0;
+  transform: translateX(100%);
+}
+.fade-leave-to{
+  opacity: 0;
+  transform: translateX(-100%);
+  position: absolute;
+}
+.fade-enter-active,
+.fade-leave-active{
+  transition: all 0.5s ease;
 }
 
 </style>  

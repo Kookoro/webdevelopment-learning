@@ -38,6 +38,11 @@ module.exports = {
                 changeOrigin: true, // 必须要加，否则访问的是自己
                 secure: false 
             },  
+            '/1920': {
+                target: "https://picsum.photos", // 需要跨域访问的地址
+                changeOrigin: true, // 必须要加，否则访问的是自己
+                secure: false 
+            },  
             
 
         },    
