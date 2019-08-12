@@ -8,40 +8,20 @@
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Page title</v-toolbar-title>
+      <v-toolbar-title>demo</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       
     </v-app-bar>
   </div>
-    <!-- <mt-header fixed title="项目名称"></mt-header> -->
+   
     <transition name="fade">
       <keep-alive>
        <router-view></router-view>
       </keep-alive> 
     </transition>
-    <!-- <nav class="mui-bar mui-bar-tab">
-      <a class="mui-tab-item mui-active" href="#tabbar">
-        <span class="mui-icon mui-icon-home"></span>
-        <span class="mui-tab-label">首页</span>
-      </a>
-      <a class="mui-tab-item" href="#tabbar-with-chat">
-        <span class="mui-icon mui-icon-contact"></span>
-        <span class="mui-tab-label">会员</span>
-      </a>
-      <a class="mui-tab-item" href="#tabbar-with-contact">
-        <span class="mui-icon mui-icon-contact">
-          <span class="mui-badge">9</span>
-        </span>
 
-        <span class="mui-tab-label">购物车</span>
-      </a>
-      <a class="mui-tab-item" href="#tabbar-with-map">
-        <span class="mui-icon mui-icon-search"></span>
-        <span class="mui-tab-label">搜索</span>
-      </a>
-    </nav>-->
 
     <v-bottom-navigation class="footer" color="#7659a0">
       <router-link tag="div" to="/homepage" class="reset-height">
@@ -75,10 +55,13 @@
   </div>
 </template> 
 <script>
+
 export default {
+  components:{YImage},
   data() {
     return {
       activeBtn: 1,
+      
       
     };
   }

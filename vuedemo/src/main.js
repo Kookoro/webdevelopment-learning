@@ -25,8 +25,7 @@ Vue.component(SwipeItem.name, SwipeItem);
 import 'mint-ui/lib/style.css'
 //导入mui 
 import '../src/lib/mui/css/mui.min.css'
- 
-import '../src/lib/EVA-icons/css/eva-icon.css'
+
 //导入Vuetify ui框架
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)
@@ -36,6 +35,7 @@ export default new Vuetify({
         iconfont: 'mdiSvg', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
     },
 })
+
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload,{   
     preLoad:1,

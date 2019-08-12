@@ -5,6 +5,7 @@
         <img :src="item" />
       </mt-swipe-item>
     </mt-swipe>
+
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <v-hover>
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -17,7 +18,7 @@
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
           <v-icon class="fontsetsize">mdi-share-variant</v-icon>
-          <div class="mui-media-body">图片分享</div> 
+          <div class="mui-media-body">图片分享</div>
         </a>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -53,21 +54,21 @@
     <br />
     <br />
     <br />
-        <br />
     <br />
     <br />
     <br />
     <br />
     <br />
     <br />
-        <br />
     <br />
     <br />
     <br />
     <br />
     <br />
     <br />
-        <br />
+    <br />
+    <br />
+    <br />
     <br />
     <br />
     <br />
@@ -83,22 +84,68 @@ export default {
   data() {
     return {
       swipeList: "",
-      imgList: [], //保存轮播图的数组
-      url: ""
+      imgList:[],
+      url: "http://www.86y.org/images/loading.gif",
+      
+      
     };
   },
-  created() {
+ 
+  mounted() {
+    
     this.getFirstImg();
     this.getSecondImg();
     this.getThirdImg();
+     
   },
+  
   methods: {
+   
+    
+    //  setLoading1(xhr){
+    //   let loading = 'https://cdn.dribbble.com/users/209788/screenshots/1872662/loading.gif'
+    //   this.imgList = xhr.map(item => {
+    //     item._src = item.src
+    //     item.src = loading
+    //     return item
+    //   })
+    //   setTimeout(() => {
+    //     this.imgList = xhr.map(item => {
+    //       item.src = item._src
+    //       return item
+    //     })
+    //   }, 2000)
+    // },
+    // // 图片加载完替换
+    // setLoading2(xhr){
+    //   let loading = 'https://cdn.dribbble.com/users/209788/screenshots/1872662/loading.gif'
+    //   this.imgList = xhr.map(item => {
+    //     item._src = item.src
+    //     item.src = loading
+    //     return item
+    //   })
+    //   xhr.forEach(item => {
+    //     let pic = new Image()
+    //     pic.onload = () => {
+    //       item.src = item._src
+    //     }
+    //     pic.src = item._src
+    //   })
+    // },
+    // getXhr(){
+    //   let xhr = [
+    //     {
+    //       src: '/vuedemo/src/images/loading.gif'
+    //     }
+    //   ]
+    //   this.setLoading1(xhr)
+    // },
     getFirstImg() {
       this.axios
         .get("api/pictures/random/?key=BingEverydayWallpaperPicture")
         .then(result => {
           console.log(result);
-          console.log(this.imgList.length);
+          console.log("ok1");
           if (result.statusText == "OK") {
             this.url = "https://uploadbeta.com/" + result.config.url;
             // this.url = this.swipeList
@@ -108,10 +155,12 @@ export default {
           }
         });
     },
+
     getSecondImg() {
       this.axios.get("api/pictures/random/").then(result => {
         console.log(result);
-        console.log(this.imgList.length);
+        console.log("ok2");
+
         if (result.statusText == "OK") {
           this.url = "https://uploadbeta.com/" + result.config.url;
           // this.url = this.swipeList
@@ -119,12 +168,12 @@ export default {
         } else {
           Toast("加载轮播图失败");
         }
-        this.checkLoad();
       });
     },
     getThirdImg() {
       this.axios.get("https://picsum.photos/1920/1080?random").then(result => {
         console.log(result);
+        console.log("ok3");
         if (result.status == 200) {
           this.url = "https://picsum.photos/1920/1080?random";
           // this.url = this.swipeList
@@ -146,13 +195,6 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    },
-    checkLoad() {
-      if (this.imgList.length <= 0) {
-        return 0;
-      } else {
-        return 3000;
-      }
     }
   }
 };
@@ -172,16 +214,16 @@ export default {
   border: none;
 }
 .mui-grid-view.mui-grid-9 .mui-table-view-cell {
-  background-color: white
+  background-color: white;
 }
-.mui-table-view{
+.mui-table-view {
   background-color: white;
 }
 .fontsetsize {
   font-size: 20px;
   color: #466cad;
 }
-.mui-col-sm-3{
+.mui-col-sm-3 {
   width: 33.33%;
 }
 </style>
