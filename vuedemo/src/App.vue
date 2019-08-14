@@ -3,10 +3,10 @@
      <div>
    <v-app-bar
       color="#725a9c"
-      height="50px"
-      hide-on-scroll
+      height="45px"
+     ·
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon to="/homepage/"></v-app-bar-nav-icon>
 
       <v-toolbar-title>demo</v-toolbar-title>
 
@@ -52,20 +52,24 @@
         </v-btn>
       </router-link>
     </v-bottom-navigation>
+    
   </div>
+  
 </template> 
 <script>
 
 export default {
-  components:{YImage},
+  
   data() {
     return {
       activeBtn: 1,
       
       
-    };
-  }
-};
+    }
+   
+  },
+   
+}; 
 </script>  
  
 <style scoped>
@@ -80,6 +84,7 @@ export default {
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 10;
 }
 
 .reset-height {

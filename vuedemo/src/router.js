@@ -5,6 +5,8 @@ import HomePage from './componerts/tabbar/HomePage.vue'
 import Search from './componerts/tabbar/SearchContainer.vue'
 import Cart from './componerts/tabbar/CartContainer.vue'
 import Account from './componerts/tabbar/AccountContainer.vue'
+import NewsList from './componerts/news/NewsList.vue'
+import NewsInfo from './componerts/news/NewsInfo.vue'
 var router = new VueRouter({
   routes: [
     {
@@ -15,7 +17,7 @@ var router = new VueRouter({
       path: '/homepage',
       component: HomePage
     },
-    {
+    { 
       path: '/search',
       component: Search
     },
@@ -27,6 +29,15 @@ var router = new VueRouter({
       path: '/account',
       component: Account
     },
+    {
+      path:'/homepage/newslist',
+      component:NewsList
+    },
+    {
+      path:'/homepage/newsinfo/:id',
+      component:NewsInfo
+      
+    }
 
   ] 
 })

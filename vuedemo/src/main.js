@@ -28,8 +28,8 @@ import '../src/lib/mui/css/mui.min.css'
 
 //导入Vuetify ui框架
 import Vuetify from 'vuetify'
-Vue.use(Vuetify)
 import 'vuetify/dist/vuetify.min.css'
+Vue.use(Vuetify)
 export default new Vuetify({
     icons: {
         iconfont: 'mdiSvg', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
@@ -44,12 +44,17 @@ Vue.use(VueLazyload,{
 //导入vue-router路由
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
- 
-//导入router.js
+
+import moment from 'moment'
+
+Vue.filter('dataFormat',(dataStr, pattern = "YYYY-MM-DD HH:mm:ss")=>{
+    return moment(dataStr).format(pattern)
+})
+//导入router.js 
 import router from './router.js';
 
 //导入axios插件
-import axios from 'axios';
+import axios from 'axios'; 
 Vue.prototype.axios = axios;
 
 const vm = new Vue({
