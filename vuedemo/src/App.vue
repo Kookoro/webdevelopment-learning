@@ -4,11 +4,14 @@
    <v-app-bar
       color="#725a9c"
       height="45px"
-     ·
-    >
-      <v-app-bar-nav-icon to="/homepage/"></v-app-bar-nav-icon>
+    > 
+     
+  <div class="my-2">
+          <v-btn text normal color="primary" @click="goback">
+              <v-icon>mdi-chevron-left</v-icon>vuedemo</v-btn>
+        </div>
 
-      <v-toolbar-title>demo</v-toolbar-title>
+      
 
       <v-spacer></v-spacer>
 
@@ -62,11 +65,14 @@ export default {
   
   data() {
     return {
-      activeBtn: 1,
-      
-      
+ 
     }
    
+  },
+  methods: {
+    goback(){//返回上一页
+      this.$router.go(-1);
+    }
   },
    
 }; 
@@ -103,5 +109,7 @@ export default {
 .fade-leave-active{
   transition: all 0.5s ease;
 }
-
+.v-btn{
+  width: 100px;
+}
 </style>  

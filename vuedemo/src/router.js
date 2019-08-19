@@ -1,12 +1,12 @@
 //导入vue-router
 import VueRouter from 'vue-router'
 //导入对应组件
-import HomePage from './componerts/tabbar/HomePage.vue'
-import Search from './componerts/tabbar/SearchContainer.vue'
-import Cart from './componerts/tabbar/CartContainer.vue'
-import Account from './componerts/tabbar/AccountContainer.vue'
-import NewsList from './componerts/news/NewsList.vue'
-import NewsInfo from './componerts/news/NewsInfo.vue'
+import HomePage from './components/tabbar/HomePage.vue'
+import Search from './components/tabbar/SearchContainer.vue'
+import Cart from './components/tabbar/CartContainer.vue'
+import Account from './components/tabbar/AccountContainer.vue'
+import NewsList from './components/news/NewsList.vue'
+import NewsInfo from './components/news/NewsInfo.vue'
 var router = new VueRouter({
   routes: [
     {

@@ -1,31 +1,34 @@
 <template>
   <div>
-    <keep-alive>
-     <v-carousel height="240px" cycle 
+    <!-- <v-carousel height="240px" cycle 
      hide-delimiter-background>
+    
+      
+   
    <div >
+     
+     
       <v-carousel-item
       v-for="item in imgList"
       :key="item.url"
       :src="item"
-      
-      
     >
-  
     </v-carousel-item>
+    
    </div>
-  </v-carousel>
+   
+    </v-carousel>-->
+    <keep-alive>
+      <mt-swipe :auto="4000" :continuous="true">
+        <mt-swipe-item v-for="item in imgList" :key="item.url">
+          <img :src="item" />
+        </mt-swipe-item>
+      </mt-swipe>
     </keep-alive>
-    <!-- <mt-swipe :auto="4000" :continuous="true">
-      <mt-swipe-item v-for="item in imgList" :key="item.url">
-      
-      </mt-swipe-item>
-    </mt-swipe> -->
- 
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <v-hover>
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-          <router-link to="/homepage/newslist"> 
+          <router-link to="/homepage/newslist">
             <v-icon class="fontsetsize">mdi-television-guide</v-icon>
             <div class="mui-media-body">新闻资讯</div>
           </router-link>
@@ -100,28 +103,19 @@ export default {
   data() {
     return {
       swipeList: "",
-      imgList:[
-        
-      ],
-      
-      
-      
+      imgList: []
     };
   },
- 
+
   mounted() {
-    
     this.getFirstImg();
     this.getSecondImg();
-    this.getThirdImg();
-      
+    // this.getThirdImg();
   },
-  
+
   methods: {
-   deleteimg(){
-     this.imgList.shift()
-   },
-    
+   
+
     //  setLoading1(xhr){
     //   let loading = 'https://cdn.dribbble.com/users/209788/screenshots/1872662/loading.gif'
     //   this.imgList = xhr.map(item => {
@@ -216,21 +210,20 @@ export default {
           console.log(error);
         });
     }
-    
   }
 };
 </script> 
 <style lang="scss" scoped>
-// .mint-swipe {
-//   height: 240px;
+.mint-swipe {
+  height: 240px;
 
-//   .mint-swipe-item {
-//     img {
-//       width: 100%;
-//       height: 100%;
-//     }
-//   }
-// }
+  .mint-swipe-item {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
 
 .mui-grid-view.mui-grid-9 {
   border: none;
@@ -248,10 +241,4 @@ export default {
 .mui-col-sm-3 {
   width: 33.33%;
 }
-.v-image-container{
-  width: 100%;
-  height: 100%; 
-  
-}
-
 </style>

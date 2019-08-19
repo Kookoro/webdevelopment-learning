@@ -22,6 +22,10 @@ import {
 
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+import {
+   Button
+} from 'mint-ui';
+Vue.component(Button.name,Button)
 import 'mint-ui/lib/style.css'
 //导入mui 
 import '../src/lib/mui/css/mui.min.css'
@@ -47,7 +51,7 @@ Vue.use(VueRouter);
 
 import moment from 'moment'
 
-Vue.filter('dataFormat',(dataStr, pattern = "YYYY-MM-DD HH:mm:ss")=>{
+Vue.filter('dateFormat',(dataStr, pattern = "YYYY-MM-DD HH:mm:ss")=>{
     return moment(dataStr).format(pattern)
 })
 //导入router.js 
