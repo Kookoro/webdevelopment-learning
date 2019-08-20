@@ -43,8 +43,12 @@ module.exports = {
                 changeOrigin: true, // 必须要加，否则访问的是自己
                 secure: false 
             },  
-            
-
+            '/picture': {
+                target: "https://sotama.cool", // 需要跨域访问的地址
+                changeOrigin: true, // 必须要加，否则访问的是自己
+                secure: false
+            },  
+ 
         },    
  
     },  
@@ -98,9 +102,10 @@ module.exports = {
             },
             {
                 test: /\.(jpg|png|gif|bmp|jpeg)$/,
-                use: 'url-loader?limit=8294454&name=[name].[ext]' //处理图片路径的loader ?后传参 limit
+                use: ['url-loader?limit=8294454&name=[name].[ext]','img-loader'],//处理图片路径的loader ?后传参 limit
                 //limit 给定的值是图片的大小 单位byte，如果图片大小大于或等于给定的limit值则不会被转换为base64格式的字符串，反之
                 //name
+                    
             },
             {
                 test: /\.(ttf|eot|svg|woff|woff2)$/,

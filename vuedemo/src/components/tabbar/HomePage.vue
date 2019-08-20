@@ -20,8 +20,14 @@
     </v-carousel>-->
     <keep-alive>
       <mt-swipe :auto="4000" :continuous="true">
+        <img
+        :src="imgURL"
+          class="loading"
+          v-show="flag"
+           
+        />
         <mt-swipe-item v-for="item in imgList" :key="item.url">
-          <img :src="item" />
+          <img :src="item" @load="loadImage()" />
         </mt-swipe-item>
       </mt-swipe>
     </keep-alive>
@@ -98,24 +104,26 @@
 </template>
 <script>
 import { Toast } from "mint-ui";
-
+// import imgURL from '../../images/loading.gif'
 export default {
   data() {
     return {
       swipeList: "",
-      imgList: []
+      imgList: [],
+      flag:true,
+      imgURL:require('../../images/loading.gif')
     };
   },
 
   mounted() {
-    this.getFirstImg();
-    this.getSecondImg();
+    // this.getFirstImg();
+    // this.getSecondImg();
     // this.getThirdImg();
+    this.getAllImg();
+    
   },
 
   methods: {
-   
-
     //  setLoading1(xhr){
     //   let loading = 'https://cdn.dribbble.com/users/209788/screenshots/1872662/loading.gif'
     //   this.imgList = xhr.map(item => {
@@ -155,49 +163,75 @@ export default {
     //   this.setLoading1(xhr)
     // },
     getFirstImg() {
-      this.axios
-        .get("api/pictures/random/?key=BingEverydayWallpaperPicture")
-        .then(result => {
-          console.log(result);
-          console.log("ok1");
-          if (result.statusText == "OK") {
-            this.url = "https://uploadbeta.com/" + result.config.url;
-            // this.url = this.swipeList
-            this.imgList.push(this.url);
-          } else {
-            Toast("加载轮播图失败");
-          }
-        });
+      console.log("调用第一个接口");
+      return this.axios.get(
+        "api/pictures/random/?key=BingEverydayWallpaperPicture"
+      );
+      // .then(result => {
+      //   console.log(result);
+      //   console.log("ok1");
+      //   if (result.statusText == "OK") {
+      //     this.url = "https://uploadbeta.com/" + result.config.url;
+      //     // this.url = this.swipeList
+      //     this.imgList.push(this.url);
+      //   } else {
+      //     Toast("加载轮播图失败");
+      //   }
+      // });
     },
 
     getSecondImg() {
-      this.axios.get("api/pictures/random/").then(result => {
-        console.log(result);
-        console.log("ok2");
+      return this.axios.get("api/pictures/random/");
+      // .then(result => {
+      //   console.log(result);
+      //   console.log("ok2");
 
-        if (result.statusText == "OK") {
-          this.url = "https://uploadbeta.com/" + result.config.url;
-          // this.url = this.swipeList
-          this.imgList.push(this.url);
-        } else {
-          Toast("加载轮播图失败");
-        }
-      });
+      //   if (result.statusText == "OK") {
+      //     this.url = "https://uploadbeta.com/" + result.config.url;
+      //     // this.url = this.swipeList
+      //     this.imgList.push(this.url);
+      //   } else {
+      //     Toast("加载轮播图失败");
+      //   }
+      // });
     },
     getThirdImg() {
-      this.axios.get("https://picsum.photos/1920/1080?random").then(result => {
-        console.log(result);
-        console.log("ok3");
-        if (result.status == 200) {
-          this.url = "https://picsum.photos/1920/1080?random";
-          // this.url = this.swipeList
-          this.imgList.push(this.url);
-        } else {
-          Toast("加载轮播图失败");
-        }
-      });
+      console.log("调用第三个接口");
+      return this.axios.get("http://lorempixel.com/1600/900/");
+      // .then(result => {
+      //   console.log(result);
+      //   console.log("ok3");
+      //   if (result.status == 200) {
+      //     this.url = "https://picsum.photos/1920/1080?random";
+      //     // this.url = this.swipeList
+      //     this.imgList.push(this.url);
+      //   } else {
+      //     Toast("加载轮播图失败");
+      //   }
+      // });
     },
+    getAllImg() {
+      var me = this;
 
+      this.axios.all([me.getFirstImg(), me.getSecondImg()]).then(
+        me.axios.spread(function(allTask, allCity) {
+          console.log("所有请求完成");
+          console.log("请求1结果", allTask);
+          console.log("请求2结果", allCity);
+
+          for (let i = 0; i < arguments.length; i++) {
+            if ((allTask.status === 200) & (allCity.status === 200)) {
+              me.url = "https://uploadbeta.com/" + arguments[i].config.url;
+
+              me.imgList.push(me.url);
+            } else {
+              Toast("获取轮播图失败");
+            }
+          }
+        })
+      );
+      
+    },
     show() {
       this.axios
         .get(
@@ -209,7 +243,26 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+    loadImage() {
+      this.flag = false;
+    },
+//     ready(pics) {
+//     const picsAll = pics.map((imgurl) => {
+//         // 仅是为了区分下不同的图片链接
+//         return new Promise((resolve, reject) => {
+//             const img = new Image();
+//             img.src = imgurl;
+//             img.onload = () => resolve(imgurl);
+//             img.onerror = () => reject(new Error(imgurl + ' load error'));
+//         })
+//     });
+//     Promise.all(picsAll).then(() => {
+//         console.log('load all success');
+//     }).catch((e) => {
+//         console.log(e);
+//     })
+// }
   }
 };
 </script> 
@@ -241,4 +294,9 @@ export default {
 .mui-col-sm-3 {
   width: 33.33%;
 }
+.loading {
+  width: 100%;
+  height: 100%;
+}
+
 </style>

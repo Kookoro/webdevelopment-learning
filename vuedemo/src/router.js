@@ -7,6 +7,7 @@ import Cart from './components/tabbar/CartContainer.vue'
 import Account from './components/tabbar/AccountContainer.vue'
 import NewsList from './components/news/NewsList.vue'
 import NewsInfo from './components/news/NewsInfo.vue'
+import PicShare from './components/pics/picshare.vue'
 var router = new VueRouter({
   routes: [
     {
@@ -36,6 +37,11 @@ var router = new VueRouter({
     {
       path:'/homepage/newsinfo/:id',
       component:NewsInfo
+      
+    },
+    { 
+      path:'/homepage/picshare',
+      component:PicShare
       
     }
 

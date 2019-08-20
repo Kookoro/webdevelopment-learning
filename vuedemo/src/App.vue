@@ -1,30 +1,22 @@
 <template>
   <div class="app-container">
-     <div>
-   <v-app-bar
-      color="#725a9c"
-      height="45px"
-    > 
-     
-  <div class="my-2">
+    <div>
+      <v-app-bar color="#725a9c" height="45px" fixed >
+        <div class="my-2">
           <v-btn text normal color="primary" @click="goback">
-              <v-icon>mdi-chevron-left</v-icon>vuedemo</v-btn>
+            <v-icon>mdi-chevron-left</v-icon>vuedemo
+          </v-btn>
         </div>
 
-      
+        <v-spacer></v-spacer>
+      </v-app-bar>
+    </div>
 
-      <v-spacer></v-spacer>
-
-      
-    </v-app-bar>
-  </div>
-   
     <transition name="fade">
       <keep-alive>
-       <router-view></router-view>
-      </keep-alive> 
+        <router-view></router-view>
+      </keep-alive>
     </transition>
-
 
     <v-bottom-navigation class="footer" color="#7659a0">
       <router-link tag="div" to="/homepage" class="reset-height">
@@ -55,37 +47,28 @@
         </v-btn>
       </router-link>
     </v-bottom-navigation>
-    
   </div>
-  
 </template> 
 <script>
-
 export default {
-  
   data() {
-    return {
- 
-    }
-   
+    return {};
   },
   methods: {
-    goback(){//返回上一页
+    goback() {
+      //返回上一页
       this.$router.go(-1);
     }
-  },
-   
-}; 
+  }
+};
 </script>  
  
 <style scoped>
 .app-container {
-  
   overflow-x: hidden;
+  margin-top: 45px;
 }
-.mint-header {
-  background-color: #725a9c; 
-}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -96,20 +79,21 @@ export default {
 .reset-height {
   height: 100%;
 }
-.fade-enter{
+.fade-enter {
   opacity: 0;
   transform: translateX(100%);
 }
-.fade-leave-to{
+.fade-leave-to {
   opacity: 0;
   transform: translateX(-100%);
   position: absolute;
 }
 .fade-enter-active,
-.fade-leave-active{
+.fade-leave-active {
   transition: all 0.5s ease;
 }
-.v-btn{
+.v-btn {
   width: 100px;
 }
+
 </style>  
