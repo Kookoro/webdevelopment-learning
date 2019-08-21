@@ -151,8 +151,5 @@ a {
 .v-input {
   color: #eeeeee;
 }
-.row{
-  
-  
-}
+ 
 </style> 

@@ -3,7 +3,7 @@
     <div>
       <v-app-bar color="#725a9c" height="45px" fixed >
         <div class="my-2">
-          <v-btn text normal color="primary" @click="goback">
+          <v-btn class="title" text normal color="primary" @click="goback">
             <v-icon>mdi-chevron-left</v-icon>vuedemo
           </v-btn>
         </div>
@@ -17,7 +17,7 @@
         <router-view></router-view>
       </keep-alive>
     </transition>
-
+  
     <v-bottom-navigation class="footer" color="#7659a0">
       <router-link tag="div" to="/homepage" class="reset-height">
         <v-btn value="recent">
@@ -50,6 +50,7 @@
   </div>
 </template> 
 <script>
+
 export default {
   data() {
     return {};
@@ -58,8 +59,11 @@ export default {
     goback() {
       //返回上一页
       this.$router.go(-1);
-    }
-  }
+    },
+   
+  },
+  
+  
 };
 </script>  
  
@@ -92,8 +96,8 @@ export default {
 .fade-leave-active {
   transition: all 0.5s ease;
 }
-.v-btn {
-  width: 100px;
+.title{
+  width:100px;
 }
 
 </style>  

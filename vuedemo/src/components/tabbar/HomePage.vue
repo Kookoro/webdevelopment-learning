@@ -1,36 +1,15 @@
 <template>
   <div>
-    <!-- <v-carousel height="240px" cycle 
-     hide-delimiter-background>
-    
-      
-   
-   <div >
-     
-     
-      <v-carousel-item
-      v-for="item in imgList"
-      :key="item.url"
-      :src="item"
-    >
-    </v-carousel-item>
-    
-   </div>
-   
-    </v-carousel>-->
+    <back-to-top-button></back-to-top-button>
     <keep-alive>
       <mt-swipe :auto="4000" :continuous="true">
-        <img
-        :src="imgURL"
-          class="loading"
-          v-show="flag"
-           
-        />
+        <img :src="imgURL" class="loading" v-show="flag" />
         <mt-swipe-item v-for="item in imgList" :key="item.url">
           <img :src="item" @load="loadImage()" />
         </mt-swipe-item>
       </mt-swipe>
     </keep-alive>
+
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <v-hover>
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -71,7 +50,66 @@
         </a>
       </li>
     </ul>
+
     <button @click="show">查询天气</button>
+    <audio
+      id="audio"
+     
+      
+      src="https://v1.itooi.cn/netease/url?id=498187&quality=flac"
+    ></audio>
+    <div>
+      <div class="text-center">
+        <v-bottom-sheet inset>
+          <template v-slot:activator="{ on }">
+            <v-btn light v-on="on">Open Player</v-btn>
+          </template>
+          <v-card tile>
+            <v-progress-linear v-model="progress" color="#6e5b98"></v-progress-linear>
+            <v-list>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>βios</v-list-item-title>
+                  <v-list-item-subtitle>小林未郁</v-list-item-subtitle>
+                </v-list-item-content>
+
+                <v-spacer></v-spacer>
+
+                <v-list-item-icon>
+                  <v-btn icon small>
+                    <v-icon>mdi-skip-previous</v-icon>
+                  </v-btn>
+                </v-list-item-icon>
+
+                <v-list-item-icon >
+                  <v-btn icon   small @click="changeStart">
+                    <v-icon v-show="downIcon">mdi-play</v-icon>
+                     <v-icon v-show="!downIcon">mdi-pause</v-icon>
+
+                  </v-btn>
+                </v-list-item-icon>
+
+                <v-list-item-icon class="repair" >
+                  <v-btn  small icon>
+                    <v-icon>mdi-skip-next</v-icon>
+                  </v-btn>
+                </v-list-item-icon>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-bottom-sheet>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <br />
     <br />
     <br />
@@ -104,14 +142,19 @@
 </template>
 <script>
 import { Toast } from "mint-ui";
-// import imgURL from '../../images/loading.gif'
+import backtotop from "../subcomponent/backtotop.vue";
+
 export default {
   data() {
     return {
       swipeList: "",
       imgList: [],
-      flag:true,
-      imgURL:require('../../images/loading.gif')
+      flag: true,
+      imgURL: require("../../images/loading.gif"),
+      playedTime: 0,
+      isStore:true,
+      progress:0,
+      downIcon: true
     };
   },
 
@@ -120,95 +163,24 @@ export default {
     // this.getSecondImg();
     // this.getThirdImg();
     this.getAllImg();
-    
+    document.getElementById('audio').pause();
+    this.changeProgress();
   },
 
   methods: {
-    //  setLoading1(xhr){
-    //   let loading = 'https://cdn.dribbble.com/users/209788/screenshots/1872662/loading.gif'
-    //   this.imgList = xhr.map(item => {
-    //     item._src = item.src
-    //     item.src = loading
-    //     return item
-    //   })
-    //   setTimeout(() => {
-    //     this.imgList = xhr.map(item => {
-    //       item.src = item._src
-    //       return item
-    //     })
-    //   }, 2000)
-    // },
-    // // 图片加载完替换
-    // setLoading2(xhr){
-    //   let loading = 'https://cdn.dribbble.com/users/209788/screenshots/1872662/loading.gif'
-    //   this.imgList = xhr.map(item => {
-    //     item._src = item.src
-    //     item.src = loading
-    //     return item
-    //   })
-    //   xhr.forEach(item => {
-    //     let pic = new Image()
-    //     pic.onload = () => {
-    //       item.src = item._src
-    //     }
-    //     pic.src = item._src
-    //   })
-    // },
-    // getXhr(){
-    //   let xhr = [
-    //     {
-    //       src: '/vuedemo/src/images/loading.gif'
-    //     }
-    //   ]
-    //   this.setLoading1(xhr)
-    // },
     getFirstImg() {
       console.log("调用第一个接口");
       return this.axios.get(
         "api/pictures/random/?key=BingEverydayWallpaperPicture"
       );
-      // .then(result => {
-      //   console.log(result);
-      //   console.log("ok1");
-      //   if (result.statusText == "OK") {
-      //     this.url = "https://uploadbeta.com/" + result.config.url;
-      //     // this.url = this.swipeList
-      //     this.imgList.push(this.url);
-      //   } else {
-      //     Toast("加载轮播图失败");
-      //   }
-      // });
     },
 
     getSecondImg() {
       return this.axios.get("api/pictures/random/");
-      // .then(result => {
-      //   console.log(result);
-      //   console.log("ok2");
-
-      //   if (result.statusText == "OK") {
-      //     this.url = "https://uploadbeta.com/" + result.config.url;
-      //     // this.url = this.swipeList
-      //     this.imgList.push(this.url);
-      //   } else {
-      //     Toast("加载轮播图失败");
-      //   }
-      // });
     },
     getThirdImg() {
       console.log("调用第三个接口");
       return this.axios.get("http://lorempixel.com/1600/900/");
-      // .then(result => {
-      //   console.log(result);
-      //   console.log("ok3");
-      //   if (result.status == 200) {
-      //     this.url = "https://picsum.photos/1920/1080?random";
-      //     // this.url = this.swipeList
-      //     this.imgList.push(this.url);
-      //   } else {
-      //     Toast("加载轮播图失败");
-      //   }
-      // });
     },
     getAllImg() {
       var me = this;
@@ -230,8 +202,8 @@ export default {
           }
         })
       );
-      
     },
+
     show() {
       this.axios
         .get(
@@ -247,22 +219,80 @@ export default {
     loadImage() {
       this.flag = false;
     },
-//     ready(pics) {
-//     const picsAll = pics.map((imgurl) => {
-//         // 仅是为了区分下不同的图片链接
-//         return new Promise((resolve, reject) => {
-//             const img = new Image();
-//             img.src = imgurl;
-//             img.onload = () => resolve(imgurl);
-//             img.onerror = () => reject(new Error(imgurl + ' load error'));
-//         })
-//     });
-//     Promise.all(picsAll).then(() => {
-//         console.log('load all success');
-//     }).catch((e) => {
-//         console.log(e);
-//     })
-// }
+    getmusic() {
+      this.axios
+        .get("https://v1.itooi.cn/netease/song?id=1304688448")
+        .then(result => {
+          console.log(result);
+        });
+    },
+    changeStart(){
+      this.isStore = !this.isStore;
+      const audio = document.getElementById('audio')
+      if(!this.isStore){
+        audio.play();
+        this.downIcon = !this.downIcon
+      }else{
+        audio.pause();
+         this.downIcon = !this.downIcon
+      }
+    }, 
+    changeProgress(){
+      const audio = document.getElementById('audio');
+      const timer = setInterval(()=>{
+        const numbers = audio.currentTime / audio.duration
+        let perNumber = (numbers * 100).toFixed(2)
+        if(perNumber >= 100){
+          this.isStore = true
+          this.progress = 0
+          clearInterval(timer)
+        }
+        this.progress = perNumber
+      },30)
+    },
+    
+    // playMusic() {
+    //   alert("ok");
+    //   let player = document.getElementById("audio");
+    //   player.play();
+    // },
+    // transTime() {
+    //   let player = document.getElementById("audio");
+    //   this.playedTime = player.currentTime;
+    //   var duration = parseInt(this.playedTime);
+    //   var minute = parseInt(duration / 60);
+    //   var sec = (duration % 60) + "";
+    //   var isM0 = ":";
+    //   if (minute == 0) {
+    //     minute = "00";
+    //   } else if (minute < 10) {
+    //     minute = "0" + minute;
+    //   }
+    //   if (sec.length == 1) {
+    //     sec = "0" + sec;
+    //   }
+    //   console.log(minute + isM0 + sec);
+    //   return minute + isM0 + sec;
+    // },
+    // updatelength() {
+
+    //   function updateProgress() {
+    //     let audio = document.getElementById("audio"); //js获取的方式
+    //     let value = Math.round(
+    //       (Math.floor(audio.currentTime) / Math.floor(audio.duration)) * 100
+    //     ); //当前时间/总长 再乘以一个100变成百分数
+    //       return value
+    //   }
+      
+    //   this.timer = setInterval(() => {
+    //   updateProgress();
+
+    //   }, 1000);
+    // }
+  },
+
+  components: {
+    "back-to-top-button": backtotop
   }
 };
 </script> 
@@ -298,5 +328,10 @@ export default {
   width: 100%;
   height: 100%;
 }
-
+.v-list-item__icon:last-of-type:not(:only-child){
+  margin-left: 0px;
+}
+.v-list-item{
+  padding: 0px 12px;
+}
 </style>

@@ -13,11 +13,14 @@
     <!--  --> 
     <comment-box :id="this.id"></comment-box>
   </div>
+  <back-to-top-button></back-to-top-button>
   </v-col>
   </v-row> 
+  
 </template>
 <script>
 import comment from '../subcomponent/comment.vue'
+import backtotop from '../subcomponent/backtotop.vue'
 import { Toast } from "mint-ui" 
 export default {
     
@@ -45,7 +48,8 @@ export default {
     }
   },
   components:{
-    "comment-box":comment
+    "comment-box":comment,
+    "back-to-top-button":backtotop
   }
 };
 
