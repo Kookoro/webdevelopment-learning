@@ -52,23 +52,57 @@
     </ul>
 
     <button @click="show">查询天气</button>
-    <audio
-      id="audio"
-     
-      
-      src="https://v1.itooi.cn/netease/url?id=498187&quality=flac"
-    ></audio>
+    <div class="text-center">
+    <v-bottom-sheet >
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="purple"
+          dark
+          v-on="on"
+        >
+          Open Usage
+        </v-btn>
+      </template>
+      <v-sheet class="text-center" height="200px">
+        
+       <music-view></music-view>
+      </v-sheet>
+    </v-bottom-sheet>
+  </div>
     <div>
       <div class="text-center">
-        <v-bottom-sheet inset>
-          <template v-slot:activator="{ on }">
-            <v-btn light v-on="on">Open Player</v-btn>
+        <!-- <v-bottom-sheet data-app="false"> 
+          <v-btn light v-on="on">Open Player</v-btn> -->
+          <!-- <template v-slot:activator="{ on }">
+           
           </template>
           <v-card tile>
-            <v-progress-linear v-model="progress" color="#6e5b98"></v-progress-linear>
+             <v-progress-linear v-model="progress" color="#6e5b98">
+              <v-btn ></v-btn>
+            </v-progress-linear>-->
+            <!-- <v-container fluid>
+              <v-row>
+                <v-col cols="12">
+                  <v-slider
+                  color="#6e5b98"
+                    max="100%"
+                    width=""
+                    :value="slider"
+                    :v-model="progress"
+                    @click="getValue"
+                   
+                  ></v-slider>-->
+                  <!-- <v-slider v-model="slider" thumb-label></v-slider>
+                </v-col>
+              </v-row>
+            </v-container> -->
+            <!-- <v-container fluid>
+ 
+  </v-container>
             <v-list>
               <v-list-item>
                 <v-list-item-content>
+                   <music-view></music-view>
                   <v-list-item-title>βios</v-list-item-title>
                   <v-list-item-subtitle>小林未郁</v-list-item-subtitle>
                 </v-list-item-content>
@@ -81,23 +115,22 @@
                   </v-btn>
                 </v-list-item-icon>
 
-                <v-list-item-icon >
-                  <v-btn icon   small @click="changeStart">
+                <v-list-item-icon>
+                  <v-btn icon small @click="changeStart">
                     <v-icon v-show="downIcon">mdi-play</v-icon>
-                     <v-icon v-show="!downIcon">mdi-pause</v-icon>
-
+                    <v-icon v-show="!downIcon">mdi-pause</v-icon>
                   </v-btn>
                 </v-list-item-icon>
 
-                <v-list-item-icon class="repair" >
-                  <v-btn  small icon>
+                <v-list-item-icon>
+                  <v-btn small icon>
                     <v-icon>mdi-skip-next</v-icon>
                   </v-btn>
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
-          </v-card>
-        </v-bottom-sheet>
+          </v-card> --> 
+        <!-- </v-bottom-sheet> -->
       </div>
     </div>
     <br />
@@ -143,6 +176,7 @@
 <script>
 import { Toast } from "mint-ui";
 import backtotop from "../subcomponent/backtotop.vue";
+import slider from "../subcomponent/slider.vue"
 
 export default {
   data() {
@@ -152,9 +186,21 @@ export default {
       flag: true,
       imgURL: require("../../images/loading.gif"),
       playedTime: 0,
-      isStore:true,
-      progress:0,
-      downIcon: true
+      isStore: true,
+      progress: 0,
+      slider: 40,
+      downIcon: true,
+      audio1: {
+        // 该字段是音频是否处于播放状态的属性
+        playing: false,
+
+        // 音频当前播放时长
+        currentTime: 0,
+        // 音频最大播放时长
+        maxTime: 0,
+        minTime: 0,
+        step: 0.1
+      }
     };
   },
 
@@ -163,7 +209,7 @@ export default {
     // this.getSecondImg();
     // this.getThirdImg();
     this.getAllImg();
-    document.getElementById('audio').pause();
+    document.getElementById("audio").pause();
     this.changeProgress();
   },
 
@@ -226,31 +272,61 @@ export default {
           console.log(result);
         });
     },
-    changeStart(){
+    changeStart() {
       this.isStore = !this.isStore;
-      const audio = document.getElementById('audio')
-      if(!this.isStore){
+      const audio = document.getElementById("audio");
+      if (!this.isStore) {
         audio.play();
-        this.downIcon = !this.downIcon
-      }else{
+        this.downIcon = !this.downIcon;
+      } else {
         audio.pause();
-         this.downIcon = !this.downIcon
+        this.downIcon = !this.downIcon;
       }
-    }, 
-    changeProgress(){
-      const audio = document.getElementById('audio');
-      const timer = setInterval(()=>{
-        const numbers = audio.currentTime / audio.duration
-        let perNumber = (numbers * 100).toFixed(2)
-        if(perNumber >= 100){
-          this.isStore = true
-          this.progress = 0
-          clearInterval(timer)
-        }
-        this.progress = perNumber
-      },30)
     },
-    
+    changeProgress() {
+      const audio = document.getElementById("audio");
+      const timer = setInterval(() => {
+        const numbers = audio.currentTime / audio.duration;
+        let perNumber = (numbers * 100).toFixed(5);
+        this.progress = perNumber;
+        if (perNumber >= 100) {
+          this.isStore = true;
+          this.progress = 0;
+          this.downIcon = true;
+          clearInterval(timer);
+        }
+      }, 30);
+    },
+    // setValue(e) {
+    //   console.log("clicked!");
+    //   const audio = document.getElementById("audio");
+    //   const $el = this.$el;
+    //   this.audio1.maxTime = parseInt(audio.duration);
+    //   const maxTime = this.audio1.maxTime;
+    //   const minTime = this.audio1.minTime;
+    //   const step = this.audio1.step;
+    //   let value =
+    //     ((e.clientX - $el.getBoundingClientRect().left) / $el.offsetWidth) *
+    //     (maxTime - minTime);
+    //   value = Math.round(value / step) * step + minTime;
+    //   value = parseFloat(value.toFixed(5));
+
+    //   if (value > maxTime) {
+    //     value = maxTime;
+
+    //   } else if (value < minTime) {
+    //     value = minTime;
+    //   }
+    //   this.progress = value;
+    //   console.log(this.progress);
+
+    //   audio.currentTime = value;
+    // },
+    getValue() {
+      console.log(this.slider);
+      this.progress = this.slider;
+    }
+
     // playMusic() {
     //   alert("ok");
     //   let player = document.getElementById("audio");
@@ -283,7 +359,7 @@ export default {
     //     ); //当前时间/总长 再乘以一个100变成百分数
     //       return value
     //   }
-      
+
     //   this.timer = setInterval(() => {
     //   updateProgress();
 
@@ -292,7 +368,8 @@ export default {
   },
 
   components: {
-    "back-to-top-button": backtotop
+    "back-to-top-button": backtotop,
+    "music-view":slider
   }
 };
 </script> 
@@ -310,10 +387,11 @@ export default {
 
 .mui-grid-view.mui-grid-9 {
   border: none;
+  .mui-table-view-cell {
+    background-color: white;
+  }
 }
-.mui-grid-view.mui-grid-9 .mui-table-view-cell {
-  background-color: white;
-}
+
 .mui-table-view {
   background-color: white;
 }
@@ -328,10 +406,13 @@ export default {
   width: 100%;
   height: 100%;
 }
-.v-list-item__icon:last-of-type:not(:only-child){
-  margin-left: 0px;
-}
-.v-list-item{
-  padding: 0px 12px;
-}
+// .v-list-item__icon:last-of-type:not(:only-child) {
+//   margin-left: 0px;
+// }
+// .v-list-item {
+//   padding: 0px 12px;
+// }
+// .col-12 {
+//   padding: 0;
+// }
 </style>

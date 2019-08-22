@@ -32,26 +32,26 @@ module.exports = {
                 target: "https://uploadbeta.com", // 需要跨域访问的地址
                 changeOrigin: true, // 必须要加，否则访问的是自己
                 secure: false
-            },  
+            },
             '/random': {
                 target: "https://source.unsplash.com", // 需要跨域访问的地址
                 changeOrigin: true, // 必须要加，否则访问的是自己
-                secure: false 
-            },  
+                secure: false
+            },
             '/1920': {
                 target: "https://picsum.photos", // 需要跨域访问的地址
                 changeOrigin: true, // 必须要加，否则访问的是自己
-                secure: false 
-            },  
+                secure: false
+            },
             '/picture': {
                 target: "https://sotama.cool", // 需要跨域访问的地址
                 changeOrigin: true, // 必须要加，否则访问的是自己
                 secure: false
-            },  
- 
-        },    
- 
-    },  
+            },
+
+        },
+
+    },
     plugins: [
         //配置插件的节点
         new webpack.HotModuleReplacementPlugin(), //new一个热更新的模块对象，这是启用热跟新的第三步
@@ -62,9 +62,10 @@ module.exports = {
             filename: 'index.html'
         }),
         new VueLoaderPlugin(),
+        
 
     ],
-    module: {
+    module: { 
         //这个节点，用于配置所有第三方模块加载器
         rules: [ //所有第三方模块的匹配规则
             {
@@ -89,7 +90,7 @@ module.exports = {
                         }
                     }
                 ]
-            },
+            }, 
             {
                 test: /\.scss$/,
                 use: [{
@@ -98,14 +99,14 @@ module.exports = {
                     loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
                 }, {
                     loader: "sass-loader" // 将 Sass 编译成 CSS
-                }]
+                }, ]
             },
             {
                 test: /\.(jpg|png|gif|bmp|jpeg)$/,
-                use: ['url-loader?limit=8294454&name=[name].[ext]','img-loader'],//处理图片路径的loader ?后传参 limit
+                use: ['url-loader?limit=8294454&name=[name].[ext]', 'img-loader'], //处理图片路径的loader ?后传参 limit
                 //limit 给定的值是图片的大小 单位byte，如果图片大小大于或等于给定的limit值则不会被转换为base64格式的字符串，反之
                 //name
-                    
+
             },
             {
                 test: /\.(ttf|eot|svg|woff|woff2)$/,

@@ -75,18 +75,7 @@ export default {
           }
         });
     },
-    // backToTop() {
-    //   window.scrollTo(0, 0);
-    // },
-    // scrollTop() {
-    //   this.scroll =
-    //     document.documentElement.scrollTop || document.body.scrollTop;
-    //   if (this.scroll > 400) {
-    //     this.toggleBtn = true;
-    //   } else {
-    //     this.toggleBtn = false;
-    //   }
-    // }
+    
   },
   components:{
     "back-to-top-button":backtotop

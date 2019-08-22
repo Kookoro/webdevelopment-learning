@@ -40,14 +40,10 @@ export default new Vuetify({
     },
 })
 
-import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload,{   
-    preLoad:1,
-    loading:'../src/images/loading.gif'
-});
+
 //导入vue-router路由
 import VueRouter from 'vue-router'
-Vue.use(VueRouter);
+Vue.use(VueRouter); 
 
 import moment from 'moment'
 

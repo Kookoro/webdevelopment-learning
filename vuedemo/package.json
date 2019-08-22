@@ -43,10 +43,12 @@
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "node-sass": "^4.12.0",
+    "px2rem-loader": "^0.1.9",
     "style-loader": "^0.23.1",
     "url-loader": "^2.1.0",
     "vue-loader": "^15.7.1",
     "vue-template-compiler": "^2.6.10",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "webpack-px2rem-loader": "^1.0.2"
   }
 }
