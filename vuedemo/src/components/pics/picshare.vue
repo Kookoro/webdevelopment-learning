@@ -19,13 +19,13 @@
         <span class="text--primary">
           <span>{{pic.add_time |dateFormat('YYYY-MM-DD')}}</span>
           <br />
-          <span>{{pic.content}}</span>
+          <span>{{pic.seo_description}}</span>
         </span>
       </v-card-text>
 
-      <v-card-actions>
+      <v-card-actions>  
         <v-btn text color="#590de1">Share</v-btn>
-        <router-link :to="'/homepage/picshare/'+ pic.id">
+        <router-link :to="'/homepage/picInfo/'+ pic.id">
           <v-btn text color="orange">Details</v-btn>
         </router-link>
         
@@ -94,24 +94,11 @@ export default {
   padding-top: 48px;
   margin-top: 0px;
 }
-// .roof {
-//   position: fixed;
-//   z-index: 10000;
-//   margin-bottom: 100px;
-// }
+
 * {
   touch-action: pan-y;
 }
 
-        // .toggle-enter,.toggle-leave-to{
-        //     opacity: 0;
-        // }
-        // .toggle-enter-to,.toggle-leave{
-        //     opacity: 1;
-        // }
-        // .toggle-enter-active,.toggle-leave-active{
-        //     transition: all 0.4s ease;
-        // }
   
 
 </style>

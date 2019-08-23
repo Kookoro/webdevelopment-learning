@@ -4,7 +4,7 @@
     <keep-alive>
       <mt-swipe :auto="4000" :continuous="true">
         <img :src="imgURL" class="loading" v-show="flag" />
-        <mt-swipe-item v-for="item in imgList" :key="item.url">
+        <mt-swipe-item v-for="item in imgList" :key="item.url" >
           <img :src="item" @load="loadImage()" />
         </mt-swipe-item>
       </mt-swipe>
@@ -211,9 +211,11 @@ export default {
     this.getAllImg();
     document.getElementById("audio").pause();
     this.changeProgress();
+    
   },
 
   methods: {
+    
     getFirstImg() {
       console.log("调用第一个接口");
       return this.axios.get(
@@ -406,6 +408,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 // .v-list-item__icon:last-of-type:not(:only-child) {
 //   margin-left: 0px;
 // }

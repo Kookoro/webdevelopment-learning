@@ -18,7 +18,7 @@ Vue.component(Header.name, Header)
 import {
     Swipe,
     SwipeItem
-} from 'mint-ui';
+} from 'mint-ui';//mint-ui轮播图
 
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
@@ -32,7 +32,8 @@ import '../src/lib/mui/css/mui.min.css'
 
 //导入Vuetify ui框架
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+ 
+import 'vuetify/dist/vuetify.min.css' 
 Vue.use(Vuetify)
 export default new Vuetify({
     icons: {
@@ -40,12 +41,13 @@ export default new Vuetify({
     },
 })
 
+import './css/main.css' 
 
 //导入vue-router路由
 import VueRouter from 'vue-router'
 Vue.use(VueRouter); 
 
-import moment from 'moment'
+import moment from 'moment' //moment格式化时间插件
 
 Vue.filter('dateFormat',(dataStr, pattern = "YYYY-MM-DD HH:mm:ss")=>{
     return moment(dataStr).format(pattern)
@@ -56,6 +58,21 @@ import router from './router.js';
 //导入axios插件
 import axios from 'axios'; 
 Vue.prototype.axios = axios;
+
+import preview from 'vue-preview'
+
+// 图片预览插件
+Vue.use(preview, {
+    mainClass: 'pswp--minimal--dark',
+    barsSize: {top: 0, bottom: 0},
+    captionEl: false,
+    fullscreenEl: false,
+    shareEl: false,
+    bgOpacity: 0.85,
+    tapToClose: true,
+    tapToToggleControls: false
+  }) 
+  
 
 const vm = new Vue({
     el: '#app',

@@ -100,7 +100,7 @@ module.exports = {
                 }, {
                     loader: "sass-loader" // 将 Sass 编译成 CSS
                 }, ]
-            },
+            }, 
             {
                 test: /\.(jpg|png|gif|bmp|jpeg)$/,
                 use: ['url-loader?limit=8294454&name=[name].[ext]', 'img-loader'], //处理图片路径的loader ?后传参 limit

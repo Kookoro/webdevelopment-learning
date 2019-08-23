@@ -63,7 +63,7 @@ export default {
       cTime: "00:00", // 已播放时间
       dTime: "00:00", // 总播放时间
       play: false, // 播放暂停按钮
-      audioHttp: "https://v1.itooi.cn/netease/url?id=548103859&quality=flac" // 音频链接
+      audioHttp: "https://v1.itooi.cn/netease/url?id=28381614&quality=flac" // 音频链接
     };
   },
 

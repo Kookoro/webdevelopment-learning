@@ -6,7 +6,9 @@
     <v-col cols="12" md="6">
       <v-textarea outlined name="input-7-4" label="评论" auto-grow height="130px" color="success" v-model="message"></v-textarea>
     </v-col>
-    <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
+    <!-- <mt-button class="btn-color" size="large" @click="postComment">发表评论</mt-button> -->
+
+     <v-btn block color="#6e5b98" @click="postComment" dark>发表评论</v-btn>
     <div class="cmt-list">
       <v-row>
         <v-col cols="12" sm="6" offset-sm="3">
@@ -147,9 +149,10 @@ a {
   display: block;
   text-align: center;
   padding-bottom: 10px;
+  color:#6e5b98
 }
 .v-input {
   color: #eeeeee;
 }
- 
+
 </style> 
