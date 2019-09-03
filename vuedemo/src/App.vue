@@ -7,15 +7,17 @@
             <v-icon>mdi-chevron-left</v-icon>vuedemo
           </v-btn>
         </div>
-        <audio id="audio" src="https://v1.itooi.cn/netease/url?id=34497243&quality=flac"></audio>
+        <audio id="audio"></audio>
         <v-spacer></v-spacer>
       </v-app-bar>
     </div>
 
-    <transition name="fade">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+    <transition name="fade" >
+        <keep-alive>
+         <router-view></router-view>
+        </keep-alive>
+       
+     
     </transition>
 
     <v-bottom-navigation class="footer" color="#7659a0">

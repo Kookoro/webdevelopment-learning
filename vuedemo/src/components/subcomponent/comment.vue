@@ -20,7 +20,7 @@
                     <template v-slot:default="{ active, toggle }">
                       <v-list-item-content>
                         <v-list-item-title v-text="item.user_name"></v-list-item-title>
-                        <v-list-item-subtitle class="text--primary" v-text="item.content"></v-list-item-subtitle>
+                        <v-list-item-subtitle class="text--primary" v-text="item.content" title="111111"></v-list-item-subtitle>
                       </v-list-item-content>
 
                       <v-list-item-action>
@@ -87,6 +87,7 @@ export default {
     this.getComments();
   },
   methods: {
+    
     getComments() {
       this.axios
         .get(
@@ -136,6 +137,7 @@ export default {
           }
         });
     }
+    
   },
   props: ["id"]
 };

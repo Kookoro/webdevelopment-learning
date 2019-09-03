@@ -1,43 +1,8 @@
 <template>
   <div>
+    
     <div class="bar">
-      <div class="progressbar" @click="playMusic" ref="runfatbar">
-        <div class="greenbar" ref="runbar">
-          <span class="yuan" draggable="true"></span>
-        </div>
-      </div>
-    </div>
-    <div class="time-text">{{cTime}}</div>
-    <div class="right-time time-text">{{dTime}}</div>
-    <div class="audio-btn">
-      <v-list-item-icon>
-        <v-btn icon small>
-          <v-icon>mdi-skip-previous</v-icon>
-        </v-btn>
-      </v-list-item-icon> 
-
-      <v-list-item-icon>
-        <v-btn icon small @click="audioState">
-          <v-icon v-show="downIcon">mdi-play</v-icon>
-           <v-icon  v-show="!downIcon">mdi-pause</v-icon>
-         
-        </v-btn>
-      </v-list-item-icon>
-
-      <v-list-item-icon>
-        <v-btn small icon>
-          <v-icon>mdi-skip-next</v-icon>
-        </v-btn>
-      </v-list-item-icon>
-      <!-- <i class="icon icon-left" @click="switchAudio('top')"></i>
-      <i :class="play ? 'icon icon-stop' : 'icon icon-play'" @click="audioState"></i>
-      <i class="icon icon-right2" @click="switchAudio('bottom')"></i>-->
-    </div>
-    <div>
-      <audio ref="player" :src="audioHttp"></audio>
-    </div>
-    <!-- 这里是圆形进度条 -->
-    <div class="circleProgress_wrapper">
+      <div class="circleProgress_wrapper">
       <div class="wrapper right">
         <div class="circleProgress rightcircle" ref="yuanright"></div>
       </div>
@@ -45,6 +10,47 @@
         <div class="circleProgress leftcircle" ref="yuanleft"></div>
       </div>
     </div>
+      <div class="progressbar" @click="playMusic" ref="runfatbar">
+        <div class="greenbar" ref="runbar">
+          <span class="yuan" draggable="true"></span>
+        </div>
+      </div>
+    </div>
+    <div class="time-container">
+      <div class="time-text">{{cTime}}</div>
+         <div class="audio-btn">
+      <v-list-item-icon>
+        <v-btn icon >
+          <v-icon>mdi-skip-previous</v-icon>
+        </v-btn>
+      </v-list-item-icon>
+
+      <v-list-item-icon>
+        <v-btn icon  @click="audioState">
+          <v-icon v-show="downIcon">mdi-play</v-icon>
+          <v-icon v-show="!downIcon">mdi-pause</v-icon>
+        </v-btn>
+      </v-list-item-icon>
+
+      <v-list-item-icon>
+        <v-btn  icon @click=" switchAudio('bottom')">
+          <v-icon>mdi-skip-next</v-icon>
+        </v-btn>
+      </v-list-item-icon>
+      <!-- <i class="icon icon-left" @click="switchAudio('top')"></i>
+      <i :class="play ? 'icon icon-stop' : 'icon icon-play'" @click="audioState"></i>
+      <i class="icon icon-right2" @click="switchAudio('bottom')"></i>-->
+    </div>
+      <div class="right-time time-text">{{dTime}}</div>
+    </div>
+
+ 
+    <div>
+      <audio ref="player" :src="audioHttp"></audio>
+    </div>
+    
+    <!-- 这里是圆形进度条 -->
+    
   </div>
 </template>
 <script>
@@ -63,7 +69,7 @@ export default {
       cTime: "00:00", // 已播放时间
       dTime: "00:00", // 总播放时间
       play: false, // 播放暂停按钮
-      audioHttp: "https://v1.itooi.cn/netease/url?id=28381614&quality=flac" // 音频链接
+      audioHttp: "https://v1.itooi.cn/netease/url?id=37239038&quality=flac" // 音频链接
     };
   },
 
@@ -123,13 +129,13 @@ export default {
       } else {
         this.cTime = `${branch}:${second}`;
       }
-    });
+    },{passive:true});
     // 监听颜色进度条是否触摸拖动
     musicBar.addEventListener("touchmove", event => {
       const events = event.targetTouches[0].pageX; // 获得触摸拖动的距离
       musicBar.style.width = `${(events / musicWidth) * 100}%`; // 计算进度条所在比例宽度
       music.pause(); // 触摸拖动时停止播放
-    });
+    },{passive:true});
 
     // 监听颜色进度条是否触摸拖动结束
     musicBar.addEventListener("touchend", () => {
@@ -162,6 +168,7 @@ export default {
       music.currentTime = music.duration * barWidth; // 计算点击时应播放所在的时间
       music.play(); // 播放音频
       this.play = true; // 更改播放暂停按钮为播放
+      this.downIcon = false;
     },
 
     // 点击播放暂停按钮时间
@@ -170,22 +177,27 @@ export default {
       const music = this.$refs.player; // 音频所在对象
       if (this.play) {
         music.play(); // 播放音乐
-        this.downIcon = false
+        this.downIcon = false;
       } else {
         music.pause(); // 暂停音乐
-         this.downIcon = true
+        this.downIcon = true;
       }
     },
 
     // 切换歌曲按钮
     switchAudio(value) {
+      const music = this.$refs.player; 
       if (value === "top") {
         this.audioHttp =
           "https://v1.itooi.cn/netease/url?id=411349067&quality=flac";
       } else if (value === "bottom") {
         this.audioHttp =
-          "https://v1.itooi.cn/netease/url?id=411349067&quality=flac";
+          "https://v1.itooi.cn/netease/url?id=31365070&quality=flac";
+          this.downIcon = !false;
+         
+          
       }
+      music.play()
       this.play = false; // 播放按钮为暂停
       this.$refs.runbar.style.width = 0; // 清空颜色进度条
       this.$refs.yuanright.style.display = "none"; // 清空圆形颜色进度条
@@ -195,73 +207,72 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// .circleProgress_wrapper {
-//   width: 80px;
-//   height: 80px;
-//   margin: 50px auto;
-//   position: relative;
-//   border: 1px solid #ddd;
-// }
+.circleProgress_wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 50px auto;
+  position: relative;
+  border: 1px solid #ddd;
+}
 
-// .wrapper {
-//   width: 40px;
-//   height: 80px;
-//   position: absolute;
-//   top: 0;
-//   overflow: hidden;
-// }
+.wrapper {
+  width: 40px;
+  height: 80px;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
 
-// .right {
-//   right: 0;
-// }
+.right {
+  right: 0;
+}
 
-// .left {
-//   left: 0;
-// }
+.left {
+  left: 0;
+}
 
-// .circleProgress {
-//   width: 70px;
-//   height: 70px;
-//   border: 5px solid transparent;
-//   border-radius: 50%;
-//   position: absolute;
-//   top: 0;
-// }
+.circleProgress {
+  width: 70px;
+  height: 70px;
+  border: 5px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
 
-// .rightcircle {
-//   border-top: 5px solid #1296db;
-//   border-right: 5px solid #1296db;
-//   right: 0;
-//   transform: rotate(-135deg);
-//   display: none;
-// }
+.rightcircle {
+  border-top: 5px solid #1296db;
+  border-right: 5px solid #1296db;
+  right: 0;
+  transform: rotate(-135deg);
+  display: none;
+}
 
-// .leftcircle {
-//   border-bottom: 5px solid #1296db;
-//   border-left: 5px solid #1296db;
-//   left: 0;
-//   transform: rotate(-135deg);
-//   display: none;
-// }
+.leftcircle {
+  border-bottom: 5px solid #1296db;
+  border-left: 5px solid #1296db;
+  left: 0;
+  transform: rotate(-135deg);
+  display: none;
+}
 
 .bar {
   width: 100%;
-  height: 30px;
+  height: 20px;
   line-height: 30px;
+  
 
   .progressbar {
     width: 100%;
-    height: 5px;
-    background-color:#9e9e9e;
-    margin-top: 10px;
-    
+    height: 3px;
+    background-color: #9e9e9e;
     position: relative;
   }
 
   .greenbar {
     width: 0%;
-    height: 5px;
-    
+    height: 3px;
+
     position: absolute;
     top: 0;
     left: 0;
@@ -269,25 +280,32 @@ export default {
 
     .yuan {
       display: inline-block;
-      padding: 7px;//控制按钮
+      padding: 4px; //控制按钮
       background-color: #6e5b98;
       border-radius: 50%;
       position: absolute;
-      top: -5px;
-      right: -10px;
+      top: -2px;
+      right: -5px;
     }
   }
 }
 
 .time-text {
-  display: inline-block;
+  font-size: 15px;
   width: 50%;
-  padding: 0 30px;
   box-sizing: border-box;
+  color: #757575;
+  text-align: center
 }
 
-.right-time {
-  text-align: right;
+.time-container{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  
+  .v-list-item__icon{
+   margin: 0;
+  }
 }
 
 .audio-btn {

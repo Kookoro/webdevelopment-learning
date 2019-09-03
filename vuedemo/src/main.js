@@ -41,6 +41,12 @@ export default new Vuetify({
     },
 })
 
+// VueAwesomeSwiper 插件
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
+import '../node_modules/swiper/dist/css/swiper.css'
+
+ 
 import './css/main.css' 
 
 //导入vue-router路由
