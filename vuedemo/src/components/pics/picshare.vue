@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="pic-container">
     <v-tabs fixed-tabs background-color="white" centered>
       <v-tab
         class="fix"
@@ -32,6 +33,7 @@
       </v-card-actions>
       <v-divider></v-divider>
     </v-card>
+    </div>
   </div>
 </template>
 <script>
@@ -98,7 +100,9 @@ export default {
 * {
   touch-action: pan-y;
 }
-
+.pic-container{
+  padding-bottom: 56px;
+}
   
 
 </style>

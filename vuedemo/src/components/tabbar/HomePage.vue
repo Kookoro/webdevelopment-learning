@@ -9,13 +9,15 @@
         <mt-swipe-item v-for="item in imgList" :key="item.url" >
           <img :src="item" @load="loadImage()" />
         </mt-swipe-item>
-    </mt-swipe>-->
-    <keep-alive>
+    </mt-swipe>-->  
       <div class="fixheight">
-          <swiper></swiper>
+  
+
+          <swiper :picList="imgList" :isfull="true"></swiper>
+          
       </div>
     
-    </keep-alive>
+   
 
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <v-hover>
@@ -33,7 +35,7 @@
         </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <router-link to="/homepage/goodslist">
+        <router-link to="/homepage/productlist"> 
           <v-icon class="fontsetsize">mdi-cart-outline</v-icon>
           <div class="mui-media-body">商品购买</div>
         </router-link>
@@ -158,6 +160,8 @@ import slider from "../subcomponent/slider.vue";
 import swiper from "../subcomponent/swiper.vue";
 
 export default {
+
+  
   data() {
     return {
       swipeList: "",
@@ -183,7 +187,9 @@ export default {
       }
     };
   },
-
+  created() {
+    this.getAllImg()
+  },
   mounted() {
     // this.getFirstImg();
     // this.getSecondImg();

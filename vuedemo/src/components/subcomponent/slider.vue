@@ -69,7 +69,7 @@ export default {
       cTime: "00:00", // 已播放时间
       dTime: "00:00", // 总播放时间
       play: false, // 播放暂停按钮
-      audioHttp: "https://v1.itooi.cn/netease/url?id=37239038&quality=flac" // 音频链接
+      audioHttp: "http://music.163.com/song/media/outer/url?id=666108.mp3" // 音频链接
     };
   },
 
@@ -207,54 +207,54 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.circleProgress_wrapper {
-  width: 80px;
-  height: 80px;
-  margin: 50px auto;
-  position: relative;
-  border: 1px solid #ddd;
-}
+// .circleProgress_wrapper {
+//   width: 80px;
+//   height: 80px;
+//   margin: 50px auto;
+//   position: relative;
+//   border: 1px solid #ddd;
+// }
 
-.wrapper {
-  width: 40px;
-  height: 80px;
-  position: absolute;
-  top: 0;
-  overflow: hidden;
-}
+// .wrapper {
+//   width: 40px;
+//   height: 80px;
+//   position: absolute;
+//   top: 0;
+//   overflow: hidden;
+// }
 
-.right {
-  right: 0;
-}
+// .right {
+//   right: 0;
+// }
 
-.left {
-  left: 0;
-}
+// .left {
+//   left: 0;
+// }
 
-.circleProgress {
-  width: 70px;
-  height: 70px;
-  border: 5px solid transparent;
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-}
+// .circleProgress {
+//   width: 70px;
+//   height: 70px;
+//   border: 5px solid transparent;
+//   border-radius: 50%;
+//   position: absolute;
+//   top: 0;
+// }
 
-.rightcircle {
-  border-top: 5px solid #1296db;
-  border-right: 5px solid #1296db;
-  right: 0;
-  transform: rotate(-135deg);
-  display: none;
-}
+// .rightcircle {
+//   border-top: 5px solid #1296db;
+//   border-right: 5px solid #1296db;
+//   right: 0;
+//   transform: rotate(-135deg);
+//   display: none;
+// }
 
-.leftcircle {
-  border-bottom: 5px solid #1296db;
-  border-left: 5px solid #1296db;
-  left: 0;
-  transform: rotate(-135deg);
-  display: none;
-}
+// .leftcircle {
+//   border-bottom: 5px solid #1296db;
+//   border-left: 5px solid #1296db;
+//   left: 0;
+//   transform: rotate(-135deg);
+//   display: none;
+// }
 
 .bar {
   width: 100%;

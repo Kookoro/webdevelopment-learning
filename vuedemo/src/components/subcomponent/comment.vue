@@ -3,7 +3,7 @@
     <h3>发表评论</h3>
     <hr />
     <!-- <textarea placeholder="请输入评论内容（最多120字）" maxlength="120"></textarea> -->
-    <v-col cols="12" md="6">
+    <v-col >
       <v-textarea outlined name="input-7-4" label="评论" auto-grow height="130px" color="success" v-model="message"></v-textarea>
     </v-col>
     <!-- <mt-button class="btn-color" size="large" @click="postComment">发表评论</mt-button> -->
@@ -11,10 +11,10 @@
      <v-btn block color="#6e5b98" @click="postComment" dark>发表评论</v-btn>
     <div class="cmt-list">
       <v-row>
-        <v-col cols="12" sm="6" offset-sm="3">
-          <v-card max-width="500" class="mx-auto">
-            <v-list two-line>
-              <v-list-item-group multiple width="500" active-class="pink--text">
+        <v-col >
+          <v-card max-width="100%" class="mx-auto">
+            <v-list  min-width="370px">
+              <v-list-item-group multiple  active-class="pink--text">
                 <template v-for="item in comments">
                   <v-list-item :key="item.index">
                     <template v-slot:default="{ active, toggle }">
