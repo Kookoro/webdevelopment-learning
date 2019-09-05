@@ -80,3 +80,9 @@ mui
 3. foreach循环数组 给定宽高(每一个图片数组对象中需要w与h属性)
 4. image属性中的class属性不能去掉
 ## 商品列表页
+
+
+## 在ios上调试页面
+ 借助google/`ios-webkit-debug-proxy`调试h5界面 (mac环境)
+ 1.安装 
+    +

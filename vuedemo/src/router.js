@@ -9,6 +9,8 @@ import NewsList from './components/news/NewsList.vue'
 import NewsInfo from './components/news/NewsInfo.vue'
 import PicShare from './components/pics/picshare.vue'
 import PicInfo from './components/pics/picinfo.vue'
+import ProductList from './components/product/ProductList.vue'
+import ProductInfo from './components/product/ProductInfo.vue'
 var router = new VueRouter({
   routes: [
     {
@@ -48,11 +50,19 @@ var router = new VueRouter({
     { 
       path:'/homepage/picinfo/:id',
       component:PicInfo
-      
+    
+    },
+    {
+      path:'/homepage/productlist',
+      component:ProductList
+    },
+    {
+      path:'/homepage/productinfo/:id',
+      component:ProductInfo
     }
 
-
+ 
   ] 
 })
-//把路由对象暴露出去
+//暴露路由对象
 export default router
