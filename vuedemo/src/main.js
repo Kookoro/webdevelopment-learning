@@ -68,7 +68,7 @@ Vue.prototype.axios = axios;
 import preview from 'vue-preview'
 
 // 图片预览插件
-Vue.use(preview, {
+Vue.use(preview, { 
     mainClass: 'pswp--minimal--dark',
     barsSize: {top: 0, bottom: 0},
     captionEl: false,

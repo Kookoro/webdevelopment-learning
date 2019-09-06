@@ -6,6 +6,9 @@ const webpack = require('webpack') //启用热更新第二步
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const px2rem = require('postcss-px2rem')
+
+const postcss = require('postcss')
 //这个插件的两个作用
 //1.自动在内存中根据指定页面生成内存中页面
 //2.自动把打包好的bundle.js追加到页面中去 
@@ -62,7 +65,11 @@ module.exports = {
             filename: 'index.html'
         }),
         new VueLoaderPlugin(),
-        
+        new webpack.LoaderOptionsPlugin({
+            vue:{
+                postcss:[require('postcss-px2rem')({remUnit: 75,propWhiteList:[]})]
+            }
+        })
 
     ],
     module: { 
@@ -99,7 +106,7 @@ module.exports = {
                     loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
                 }, {
                     loader: "sass-loader" // 将 Sass 编译成 CSS
-                }, ]
+                },]
             }, 
             {
                 test: /\.(jpg|png|gif|bmp|jpeg)$/,
@@ -119,7 +126,13 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                use: 'vue-loader'
+                loader: 'vue-loader',
+                options:{
+                    loaders:{
+                        css:'vue-style-loader!css-loader!px2rem-loader?remUnit75&remPrecision=8',
+                        scss:'vue-style-loader!css-loader!px2rem-loader?remUnit75&remPrecision=8!scss-loader'
+                    }
+                }
             }
 
 

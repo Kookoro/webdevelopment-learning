@@ -1,12 +1,16 @@
 # webdeveloping/vuedemo
 
 ### 前端技术栈：
- 1.Vue.js 2.6.10 [vue.js](https://cn.vuejs.org/)
- 2.Webpack 构建工具 [webpack](https://webpack.js.org/)
- 3.Mint-ui框架（按需引入） [Mint-ui](http://mint-ui.github.io/)
- 4 Vuetidy ui框架 以及对应的谷歌Meterial design icon图标[Vuetify](https://vuetifyjs.com/zh-Hans/)
- 5 vue-router [vue-router](https://router.vuejs.org)
- 6. axios[axios](https://github.com/axios/axios)
+ 1.Vue.js 2.6.10 [vue.js](https://cn.vuejs.org/)  
+
+ 2.Webpack 构建工具 [webpack](https://webpack.js.org/)  
+
+ 3.Mint-ui框架（按需引入） [Mint-ui](http://mint-ui.github.io/)  
+
+ 4 Vuetidy ui框架 以及对应的谷歌Meterial design icon图标[Vuetify](https://vuetifyjs.comzh-Hans)  
+ 5 vue-router [vue-router](https://router.vuejs.org)  
+ 
+ 6. axios[axios](https://github.com/axios/axios)  
 ## 制作首页app组件
 
 1.完成header区域，采用mint-ui组件
