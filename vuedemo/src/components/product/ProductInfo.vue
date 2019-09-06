@@ -115,13 +115,19 @@ export default {
 </script>
 <style lang="scss" scoped>
   .pic-container{
-  
+  position: relative;
+   left: 50%;
    max-width: 600px;
-   text-align: center;
+   transform: translateX(-50%);
   }
   .product-detail-container{
       position: absolute;
-      padding: 0 1.5%;
-  
+      text-align: center;
+    .v-card{
+      display: inline-block;
+      min-width: 98%;
+
+    }
+    
   }
 </style>

@@ -123,6 +123,7 @@ export default {
 .picstyle{
   height: 100%;
 }
+
 .pic-cover {
   width: 100%;
   position: absolute;
@@ -131,6 +132,14 @@ export default {
 .swiper-container{
   height: 100%;
   position: relative;
+}
+.swiper-wiper{
+  text-align: center;
+  .swiper-slide{
+    position: absolute;
+    margin: 0 auto;
+    margin-right: 0;
+  }
 }
 .full{
   width: 100%;
