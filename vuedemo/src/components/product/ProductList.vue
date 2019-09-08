@@ -86,9 +86,10 @@ export default {
   margin-bottom: 56px;
   justify-content: space-between;
   .product-item {
+    border-radius: 10px;
     width: 49%;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 8px #ccc;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 8px #e0e0e0;
     margin: 3px 0;
     padding: 2px;
     display: flex;
@@ -97,7 +98,7 @@ export default {
     min-height: 293px;
     img {
       width: 100%;
-      height: 154.89px;
+      
     }
     .title {
       font-size: 14px;

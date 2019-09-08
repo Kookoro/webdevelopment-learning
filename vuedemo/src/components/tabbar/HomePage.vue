@@ -324,7 +324,7 @@ export default {
 }
 .fontsetsize {
   font-size: 20px;
-  color: #466cad;
+  color:#6e5b98;
 }
 .mui-col-sm-3 {
   width: 33.33%;

@@ -13,7 +13,7 @@
     <!-- 图片内容区域 -->
     <div class="content display-4" v-html="picInfo.content"></div>
     <!-- 评论子组件 -->
-    <cmt-box :id="id"></cmt-box>
+    <cmt-box :id="id"></cmt-box>-
     <back-to-top></back-to-top> 
   </div>
 </template>

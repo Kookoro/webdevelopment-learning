@@ -1,3 +1,4 @@
+<!-- 轮播图组件 -->
 <template>
   <div>
     <div :style="{height: scrollerHeight}">

@@ -1,8 +1,17 @@
+<!-- 播放器组件 -->
 <template>
+
   <div>
     
     <div class="bar">
-      <div class="circleProgress_wrapper">
+      <div class="progressbar" @click="playMusic" ref="runfatbar">
+        <div class="greenbar" ref="runbar">
+          <span class="yuan" draggable="true"></span>
+        </div>
+      </div>
+      <div class="circleProgress_container">
+
+        <div class="circleProgress_wrapper">
       <div class="wrapper right">
         <div class="circleProgress rightcircle" ref="yuanright"></div>
       </div>
@@ -10,11 +19,9 @@
         <div class="circleProgress leftcircle" ref="yuanleft"></div>
       </div>
     </div>
-      <div class="progressbar" @click="playMusic" ref="runfatbar">
-        <div class="greenbar" ref="runbar">
-          <span class="yuan" draggable="true"></span>
-        </div>
       </div>
+      
+      
     </div>
     <div class="time-container">
       <div class="time-text">{{cTime}}</div>
@@ -207,59 +214,64 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// .circleProgress_wrapper {
-//   width: 80px;
-//   height: 80px;
-//   margin: 50px auto;
-//   position: relative;
-//   border: 1px solid #ddd;
-// }
+.circleProgress_container{
+  position: relative;
+  bottom: 5px
+}
+.circleProgress_wrapper {
+  width: 50px;
+  height: 50px;
+  margin: 25px auto;
+  position: relative;
+  
+}
 
-// .wrapper {
-//   width: 40px;
-//   height: 80px;
-//   position: absolute;
-//   top: 0;
-//   overflow: hidden;
-// }
+.wrapper {
+  width: 25px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
 
-// .right {
-//   right: 0;
-// }
+.right {
+  right: 0;
+}
 
-// .left {
-//   left: 0;
-// }
+.left {
+  left: 0;
+}
 
-// .circleProgress {
-//   width: 70px;
-//   height: 70px;
-//   border: 5px solid transparent;
-//   border-radius: 50%;
-//   position: absolute;
-//   top: 0;
-// }
+.circleProgress {
+  width: 50px;
+  height: 50px;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
 
-// .rightcircle {
-//   border-top: 5px solid #1296db;
-//   border-right: 5px solid #1296db;
-//   right: 0;
-//   transform: rotate(-135deg);
-//   display: none;
-// }
+.rightcircle {
+  border-top: 4px solid  #6e5b98;
+  border-right: 4px solid  #6e5b98;
+  right: 0;
+  transform: rotate(-135deg);
+  display: none;
+}
 
-// .leftcircle {
-//   border-bottom: 5px solid #1296db;
-//   border-left: 5px solid #1296db;
-//   left: 0;
-//   transform: rotate(-135deg);
-//   display: none;
-// }
+.leftcircle {
+  border-bottom: 4px solid  #6e5b98;
+  border-left: 4px solid  #6e5b98;
+  left: 0;
+  transform: rotate(-135deg);
+  display: none;
+}
 
 .bar {
   width: 100%;
   height: 20px;
   line-height: 30px;
+  
   
 
   .progressbar {

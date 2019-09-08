@@ -7,9 +7,9 @@
 
  3.Mint-ui框架（按需引入） [Mint-ui](http://mint-ui.github.io/)  
 
- 4 Vuetidy ui框架 以及对应的谷歌Meterial design icon图标[Vuetify](https://vuetifyjs.comzh-Hans)  
- 5 vue-router [vue-router](https://router.vuejs.org)  
- 
+ 4 Vuetify ui框架 以及对应的谷歌Meterial design icon图标[Vuetify](https://vuetifyjs.comzh-Hans)  
+ 5 vue-router [vue-router](https://router.vuejs.org)
+   
  6. axios[axios](https://github.com/axios/axios)  
 ## 制作首页app组件
 
@@ -58,7 +58,7 @@ mui
 5.当发表评论后，~~重新刷新列表~~，查看最新评论
  +当评论成功后，手动拼接一个最新评论对象，调用unshift方法将最新评论追加到`data`中`comments`开头
 
- ## 改造图片分享按钮为路由联机
+ ## 改造图片分享按钮为路由链接
 
 
  ## 绘制图片列表组件页面结构，并设置样式
@@ -67,7 +67,7 @@ mui
  ### 顶部滚动条
  1.vuetify中的`v-tabs`组件
 ## 获取所有分类，并渲染分类列表
-点击顶部tabbar获取相应分类id渲染相关列表图片
+点击顶部tabbar获取相应分类id渲染相关列表图片 
 ## 制作图片列表区域
 ~1.懒加载~
 2.`v-img`文档：`lazy-src`

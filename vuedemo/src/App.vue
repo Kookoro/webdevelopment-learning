@@ -22,7 +22,7 @@
      
     </transition>
 
-    <v-bottom-navigation class="footer" color="#7659a0">
+    <v-bottom-navigation   class="footer" color="#7659a0">
       <router-link tag="div" to="/homepage" class="reset-height">
         <v-btn value="recent">
           <span>首页</span>
@@ -56,13 +56,17 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      showNav:true,
+      message:''
+    };
   },
   methods: {
     goback() {
       //返回上一页
       this.$router.go(-1);
-    }
+    },
+     
   }
 };
 </script>  
