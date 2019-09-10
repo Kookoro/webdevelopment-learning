@@ -61,16 +61,18 @@
     </ul>
 
     <button @click="show">查询天气</button>
-    <div class="text-center">
-      <v-bottom-sheet>
-        <template v-slot:activator="{ on }" data-app="false">
+    <v-app id="app">
+      <div class="text-center"> 
+      <v-bottom-sheet hide-overlay>
+        <template v-slot:activator="{ on }">
           <v-btn color="purple" dark v-on="on">Open Usage</v-btn>
         </template>
         <v-sheet class="text-center" height="95px" data-app="true">
           <music-view></music-view>
         </v-sheet>
       </v-bottom-sheet>
-    </div>
+      </div>
+    </v-app>
     <div>
       <div class="text-center">
         <!-- <v-bottom-sheet data-app="false"> 
@@ -143,9 +145,7 @@
     <div class="circle-bar-left"></div>
     <div class="circle-bar-right"></div>
     <!-- 遮罩层，显示百分比 -->
-    <div class="mask">
-        <span class="percent">80%</span>
-    </div>
+    
 </div>
 
 
@@ -239,7 +239,8 @@ export default {
     show() {
       this.axios
         .get(
-          "https://free-api.heweather.net/s6/weather/now?location=chongqing&key=d4cd9a5af53546188241cffc54acf9b9"
+          // "https://free-api.heweather.net/s6/weather/now?location=chongqing&key=d4cd9a5af53546188241cffc54acf9b9"
+          " http://api.avatardata.cn/GuoNeiNews/Query?key=f9d63c54930c4ddd8032ba671f01115b&page=1&rows=10"
         )
         .then(response => {
           console.log(response);
@@ -329,6 +330,7 @@ export default {
 .mui-col-sm-3 {
   width: 33.33%;
 }
+
 // .loading {
 //   width: 100%;
 //   height: 100%;

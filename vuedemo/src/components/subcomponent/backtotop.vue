@@ -4,6 +4,7 @@ components:{
     "back-to-top-button":backtotop
 }
  -->
+<!--返回顶部按钮组件-->
 <template>
   <div>
     <transition name="toggle">
@@ -14,7 +15,6 @@ components:{
         small
         absolute
         bottom
-        
         right 
         fab
         @click="backToTop"

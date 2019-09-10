@@ -1,12 +1,16 @@
 <!-- 加减框组件 -->
 <template>
-    <div style="text-align: center">
+    <div >
         
         
-        <v-btn text  @click="handleDown()" :disabled="currentValue <= min"><v-icon>mdi-minus</v-icon></v-btn>
+        <v-btn text  @click="handleDown();sendMsgToParent()" :disabled="currentValue <= min">
+            <v-icon>mdi-minus</v-icon>
+        </v-btn>
         <input type="text" v-model="currentValue" @change="handleChange">
          
-        <v-btn text @click="handleUp()" :disabled="currentValue >= max"><v-icon>mdi-plus</v-icon></v-btn>
+        <v-btn text @click="handleUp();sendMsgToParent()" :disabled="currentValue >= max">
+            <v-icon>mdi-plus</v-icon>
+        </v-btn>
         
     </div>
 </template>
@@ -73,6 +77,10 @@
             isNumber: function (value) {
                 return (/^\-?[0-9]+$/).test(value + '');
             },
+            sendMsgToParent(){
+                
+                this.$emit("listenToChildEvent",this.currentValue)
+            }
            
         }
         
@@ -81,11 +89,11 @@
  
 <style scoped>
     input{
-        width: 46px;
-        height: 36px;
+        width: 43px;
+        height: 43px;
         padding: 0 10px;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 5px;
         text-align: center
     }
     

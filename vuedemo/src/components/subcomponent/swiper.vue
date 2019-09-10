@@ -128,11 +128,11 @@ export default {
 .pic-cover {
   width: 100%;
   position: absolute;
-  z-index: 100;
+  z-index: 10;
 }
 .swiper-container{
   height: 100%;
-  position: relative;
+  
 }
 .swiper-wiper{
   text-align: center;

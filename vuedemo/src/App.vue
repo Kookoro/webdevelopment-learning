@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div  class="app-container">
     <div>
       <v-app-bar color="#725a9c" height="45px" fixed>
         <div class="my-2">
@@ -12,15 +12,9 @@
       </v-app-bar>
     </div>
 
-    <transition name="fade" >
-       
-       <router-view></router-view>
-    
-         
-    
-       
-     
-    </transition>
+    <transition name="fade" mode="out-in">      
+       <router-view class="main"></router-view>
+</transition>
 
     <v-bottom-navigation   class="footer" color="#7659a0">
       <router-link tag="div" to="/homepage" class="reset-height">
@@ -94,13 +88,14 @@ export default {
 .fade-leave-to {
   opacity: 0;
   transform: translateX(-100%);
-  position: absolute;
+  
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 .title {
   width: 100px;
 }
+
 </style>  

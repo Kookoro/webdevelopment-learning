@@ -35,13 +35,13 @@
       <v-list-item-icon>
         <v-btn icon  @click="audioState">
           <v-icon v-show="downIcon">mdi-play</v-icon>
-          <v-icon v-show="!downIcon">mdi-pause</v-icon>
+          <v-icon  v-show="!downIcon">mdi-pause</v-icon>
         </v-btn>
       </v-list-item-icon>
 
       <v-list-item-icon>
         <v-btn  icon @click=" switchAudio('bottom')">
-          <v-icon>mdi-skip-next</v-icon>
+          <v-icon >mdi-skip-next</v-icon>
         </v-btn>
       </v-list-item-icon>
       <!-- <i class="icon icon-left" @click="switchAudio('top')"></i>
@@ -216,19 +216,20 @@ export default {
 <style lang="scss" scoped>
 .circleProgress_container{
   position: relative;
-  bottom: 5px
+  bottom: 3px;
+  
 }
 .circleProgress_wrapper {
-  width: 50px;
-  height: 50px;
-  margin: 25px auto;
+  width: 40px;
+  height: 40px;
+  margin: 20px auto;
   position: relative;
   
 }
 
 .wrapper {
-  width: 25px;
-  height: 50px;
+  width: 20px;
+  height: 40px;
   position: absolute;
   top: 0;
   overflow: hidden;
@@ -243,8 +244,8 @@ export default {
 }
 
 .circleProgress {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: 4px solid transparent;
   border-radius: 50%;
   position: absolute;
@@ -323,5 +324,12 @@ export default {
 .audio-btn {
   width: 100%;
   text-align: center;
+  .v-btn{
+    width: 40px;
+    height: 40px;
+  }
+  .v-btn-toggle{
+   background-color: #6e5b98;
+  }
 }
 </style>
