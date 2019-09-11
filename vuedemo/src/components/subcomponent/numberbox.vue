@@ -82,6 +82,12 @@
                 this.$emit("listenToChildEvent",this.currentValue)
             }
            
+        },
+        watch:{
+            //属性监听max
+            'max':function(newVal,oldVal){
+                
+            }
         }
         
     }
