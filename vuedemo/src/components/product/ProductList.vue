@@ -1,7 +1,7 @@
 <template>
   <div class="product-list">
     <router-link tag="div" :to="'/homepage/productinfo/'+ item.id" class="product-item" v-for="item in productlist" :key="item.id">
-      <img :src="item.img_url" class="product-pic" alt="加载失败" />
+      <img :src="item.img_url" class="product-pic" :onerror="errorImg" />
       <h1 class="title">{{item.title}}</h1>
       <div class="product-info">
         <p class="product-price">
@@ -40,7 +40,8 @@ export default {
     return {
       imgUrl,
       pageindex: 1, //分页的页数
-      productlist: [] //存放商品列表的数组
+      productlist: [], //存放商品列表的数组
+      errorImg:'this.src="' + require('../../images/imgloaderror.jpeg') + '"'
     };
   },
   created() {

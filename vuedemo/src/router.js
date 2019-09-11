@@ -11,6 +11,8 @@ import PicShare from './components/pics/picshare.vue'
 import PicInfo from './components/pics/picinfo.vue'
 import ProductList from './components/product/ProductList.vue'
 import ProductInfo from './components/product/ProductInfo.vue'
+import ProductDesc from './components/product/ProductDesc.vue'
+import ProductComment from './components/product/ProductComment.vue'
 var router = new VueRouter({
   routes: [
     {
@@ -50,7 +52,6 @@ var router = new VueRouter({
     { 
       path:'/homepage/picinfo/:id',
       component:PicInfo
-    
     },
     {
       path:'/homepage/productlist',
@@ -59,6 +60,18 @@ var router = new VueRouter({
     {
       path:'/homepage/productinfo/:id',
       component:ProductInfo
+    },
+    {
+      path:'/homepage/productdesc/:id',
+      name:'/homepage/productdesc',
+      component:ProductDesc,
+      
+    },
+    {
+      path:'/homepage/productcomment/:id',
+      name:'/homepage/productcomment',
+      component:ProductComment,
+      
     }
 
  

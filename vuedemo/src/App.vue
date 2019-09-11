@@ -1,5 +1,5 @@
 <template>
-  <div  class="app-container">
+  <div class="app-container">
     <div>
       <v-app-bar color="#725a9c" height="45px" fixed>
         <div class="my-2">
@@ -12,13 +12,13 @@
       </v-app-bar>
     </div>
 
-    <transition name="fade" mode="out-in">      
-       <router-view class="main"></router-view>
-</transition>
+    <transition name="fade" mode="out-in">
+      <router-view class="main"></router-view>
+    </transition>
 
-    <v-bottom-navigation   class="footer" color="#7659a0">
+    <v-bottom-navigation v-model="defaultBtn" class="footer" color="#7659a0">
       <router-link tag="div" to="/homepage" class="reset-height">
-        <v-btn value="recent">
+        <v-btn value="homepage">
           <span>首页</span>
           <v-icon>mdi-home</v-icon>
         </v-btn>
@@ -51,17 +51,20 @@
 export default {
   data() {
     return {
-      showNav:true,
-      message:''
+      showNav: true,
+      message: "",
+      defaultBtn: "homepage"
     };
   },
   methods: {
     goback() {
       //返回上一页
       this.$router.go(-1);
+      this.defaultBtn = "homepage";
     },
-     
-  }
+   
+  },
+  
 };
 </script>  
  
@@ -88,7 +91,6 @@ export default {
 .fade-leave-to {
   opacity: 0;
   transform: translateX(-100%);
-  
 }
 .fade-enter-active,
 .fade-leave-active {
@@ -97,5 +99,4 @@ export default {
 .title {
   width: 100px;
 }
-
 </style>  

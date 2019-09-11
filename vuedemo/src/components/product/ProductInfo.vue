@@ -8,7 +8,7 @@
       </div>
 
       <!-- 商品购买区域 -->
-      <v-card class="mx-auto" max-width="400">
+      <v-card class="mx-auto" max-width="400" elevation="0">
         <v-card-text>
           <span class="now-price">￥{{productinfo.sell_price}}</span>
           <br />
@@ -36,24 +36,33 @@
                 </v-btn>
               </div>
               <div class="operate-right">
-                <v-bottom-sheet hide-overlay>
+                <v-bottom-sheet hide-overlay v-model="sheet">
                   <template v-slot:activator="{ on }">
                     <v-btn color="#77699c" dark v-on="on" depressed>加入购物车</v-btn>
                   </template>
                   <v-sheet class="shoppingcart-container" height="200px">
+                    
                     <div class="numberbox-container">
+                      
                       <span>购买数量:</span>
+                      
                       <numberbox
                         v-on:listenToChildEvent="showMsgFromChild"
                         v-model="value"
-                        :max="99"
+                        :max="productinfo.stock_quantity"
                         :min="1"
                       ></numberbox>
                     </div>
-                    <span style>颜色分类</span>
-
+                    
+                    <span style="margin:8px 0 0 8px;color:#757575;font-size:16px;font-weight:bold">颜色分类:</span>
+                     <div class="color-category">
+                      <v-btn color="red" dark>红</v-btn>
+                      <v-btn color="black" dark>黑</v-btn>
+                      <v-btn color="white">白</v-btn>
+                      <v-btn color="blue" dark>蓝</v-btn>
+                     </div>
                     <div></div>
-                    <v-btn class="confirm-btn" color="#6e5b98" dark>确定</v-btn>
+                    <v-btn class="confirm-btn" color="#6e5b98" dark @click="closeSheet();successNotice()">确定</v-btn>
                   </v-sheet>
                 </v-bottom-sheet>
                 <v-btn color="#6e5b98" dark depressed>立即购买</v-btn>
@@ -63,7 +72,7 @@
         </v-card-text>
       </v-card>
       <!-- 商品描述区域 -->
-      <v-card class="mx-auto" max-width="400">
+      <v-card class="mx-auto" max-width="400" elevation="0">
         <v-card-title class="align-end fill-height">商品参数</v-card-title>
         <v-divider></v-divider>
         <v-card-text class="product-describe">
@@ -76,7 +85,7 @@
         <v-divider></v-divider>
         <v-card-actions class="product-operate-button">
           <v-btn color="#6e5b98" dark @click="goDesc(id)">查看详情</v-btn>
-          <v-btn color="#6e5b98" outlined dark @click="goDesc(id)">商品评论</v-btn>
+          <v-btn color="#6e5b98" outlined dark @click="goComments(id)">商品评论</v-btn>
         </v-card-actions>
       </v-card>
     </div>
@@ -88,14 +97,16 @@
 import swiper from "../subcomponent/swiper.vue";
 //导入加减框组件
 import numberbox from "../subcomponent/numberbox.vue";
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
       id: this.$route.params.id, //将路由参数对象中的ID挂载到data中
       imgList: [], //获取到的图片列表数组
       imgList2: [], //处理后的图片列表数组
-      value: 1,
-      productinfo: {} //获取到的图片列表信息
+      value: 1,      
+      productinfo: {}, //获取到的图片列表信息
+      sheet:false,//底部表单切换
     };
   },
   created() {
@@ -129,6 +140,25 @@ export default {
             this.productinfo = result.data.message[0];
           }
         });
+    },
+    goDesc(id){
+      //
+      this.$router.push({name:"/homepage/productdesc",params:{ id}})
+    },
+    goComments(id){
+      //
+      this.$router.push({name:"/homepage/productcomment",params:{ id}})
+    },
+    closeSheet(){
+      this.sheet = !this.sheet;
+    },
+    successNotice(){
+      if(this.value > 0){
+        Toast({
+          message:'添加成功，在购物车等着您'+this.value,
+          iconClass:'mdi mdi-check'
+        })
+      }
     }
   },
   components: {
@@ -146,10 +176,16 @@ export default {
 }
 .product-detail-container {
   text-align: center;
+  .v-card__text{
+    padding-top: 10px;
+  }
   .v-card {
+
+    
     display: inline-block;
     min-width: 98%;
     margin-top: 5px;
+    
   }
 }
 .now-price {
@@ -176,8 +212,12 @@ export default {
     font-weight: bold;
     color: #757575;
   }
+  
 }
-
+.color-category{
+    margin:8px 0 0 8px;
+    text-align: center
+  }
 .v-btn__content {
   display: flex;
 }
@@ -213,6 +253,7 @@ export default {
   }
 }
 .shoppingcart-container {
+  
   .confirm-btn {
     position: absolute;
     bottom: 0;

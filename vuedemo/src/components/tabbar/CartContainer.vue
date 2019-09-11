@@ -54,8 +54,19 @@
     data () {
       return {
         dialog: false,
+        routename:''
       }
     },
+    beforeRouteEnter(to, from, next) {
+    var route = from.path.slice(1);
+    next(vm=>{
+      vm.$data.routername = route
+      console.log(vm.$data.routername);
+      
+    })
+   
+  },
+  
   }
 </script>
 <style scoped>
