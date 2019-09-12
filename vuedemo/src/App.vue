@@ -61,10 +61,8 @@ export default {
       //返回上一页
       this.$router.go(-1);
       this.defaultBtn = "homepage";
-    },
-   
-  },
-  
+    }
+  }
 };
 </script>  
  

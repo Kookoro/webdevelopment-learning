@@ -47,7 +47,7 @@ Vue.use(VueAwesomeSwiper)
 import '../node_modules/swiper/dist/css/swiper.css'
 
  
-import './css/main.css' 
+
 
 //导入vue-router路由
 import VueRouter from 'vue-router'
@@ -71,7 +71,7 @@ import preview from 'vue-preview'
 Vue.use(preview, { 
     mainClass: 'pswp--minimal--dark',
     barsSize: {top: 0, bottom: 0},
-    captionEl: false,
+    captionEl: false, 
     fullscreenEl: false,
     shareEl: false,
     bgOpacity: 0.85,

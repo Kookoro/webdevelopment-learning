@@ -21,8 +21,7 @@
           <div class="content-container">
             <div class>
               <div class="text--primary">
-                <v-card-title class="align-end fill-height" >{{productinfo.title}}</v-card-title>
-                
+                <v-card-title class="align-end fill-height">{{productinfo.title}}</v-card-title>
               </div>
             </div>
             <!-- <v-btn color="#6e5b98" dark>加入购物车</v-btn>  -->
@@ -41,11 +40,9 @@
                     <v-btn color="#77699c" dark v-on="on" depressed>加入购物车</v-btn>
                   </template>
                   <v-sheet class="shoppingcart-container" height="200px">
-                    
                     <div class="numberbox-container">
-                      
                       <span>购买数量:</span>
-                      
+
                       <numberbox
                         v-on:listenToChildEvent="showMsgFromChild"
                         v-model="value"
@@ -53,16 +50,23 @@
                         :min="1"
                       ></numberbox>
                     </div>
-                    
-                    <span style="margin:8px 0 0 8px;color:#757575;font-size:16px;font-weight:bold">颜色分类:</span>
-                     <div class="color-category">
+
+                    <span
+                      style="margin:8px 0 0 8px;color:#757575;font-size:16px;font-weight:bold"
+                    >颜色分类:</span>
+                    <div class="color-category">
                       <v-btn color="red" dark>红</v-btn>
                       <v-btn color="black" dark>黑</v-btn>
                       <v-btn color="white">白</v-btn>
                       <v-btn color="blue" dark>蓝</v-btn>
-                     </div>
+                    </div>
                     <div></div>
-                    <v-btn class="confirm-btn" color="#6e5b98" dark @click="closeSheet();successNotice()">确定</v-btn>
+                    <v-btn
+                      class="confirm-btn"
+                      color="#6e5b98"
+                      dark
+                      @click="closeSheet();successNotice()"
+                    >确定</v-btn>
                   </v-sheet>
                 </v-bottom-sheet>
                 <v-btn color="#6e5b98" dark depressed>立即购买</v-btn>
@@ -104,9 +108,9 @@ export default {
       id: this.$route.params.id, //将路由参数对象中的ID挂载到data中
       imgList: [], //获取到的图片列表数组
       imgList2: [], //处理后的图片列表数组
-      value: 1,      
+      value: 1, //购物车数量
       productinfo: {}, //获取到的图片列表信息
-      sheet:false,//底部表单切换
+      sheet: false //底部表单切换
     };
   },
   created() {
@@ -141,23 +145,23 @@ export default {
           }
         });
     },
-    goDesc(id){
+    goDesc(id) {
       //
-      this.$router.push({name:"/homepage/productdesc",params:{ id}})
+      this.$router.push({ name: "/homepage/productdesc", params: { id } });
     },
-    goComments(id){
+    goComments(id) {
       //
-      this.$router.push({name:"/homepage/productcomment",params:{ id}})
+      this.$router.push({ name: "/homepage/productcomment", params: { id } });
     },
-    closeSheet(){
+    closeSheet() {
       this.sheet = !this.sheet;
     },
-    successNotice(){
-      if(this.value > 0){
+    successNotice() {
+      if (this.value > 0) {
         Toast({
-          message:'添加成功，在购物车等着您'+this.value,
-          iconClass:'mdi mdi-check'
-        })
+          message: "添加成功，在购物车等着您" + this.value,
+          iconClass: "mdi mdi-check"
+        });
       }
     }
   },
@@ -176,16 +180,13 @@ export default {
 }
 .product-detail-container {
   text-align: center;
-  .v-card__text{
+  .v-card__text {
     padding-top: 10px;
   }
   .v-card {
-
-    
     display: inline-block;
     min-width: 98%;
     margin-top: 5px;
-    
   }
 }
 .now-price {
@@ -212,12 +213,11 @@ export default {
     font-weight: bold;
     color: #757575;
   }
-  
 }
-.color-category{
-    margin:8px 0 0 8px;
-    text-align: center
-  }
+.color-category {
+  margin: 8px 0 0 8px;
+  text-align: center;
+}
 .v-btn__content {
   display: flex;
 }
@@ -253,7 +253,6 @@ export default {
   }
 }
 .shoppingcart-container {
-  
   .confirm-btn {
     position: absolute;
     bottom: 0;

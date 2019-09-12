@@ -9,7 +9,7 @@
 
  4 Vuetify ui框架 以及对应的谷歌Meterial design icon图标[Vuetify](https://vuetifyjs.comzh-Hans)  
  5 vue-router [vue-router](https://router.vuejs.org)
-   
+
  6. axios[axios](https://github.com/axios/axios)  
 ## 制作首页app组件
 
@@ -23,8 +23,10 @@
 1.调用2个公共图片API接口，通过 `axios` 并发请求获取图片url保存至相应轮播图数组中
 2.轮播图图片加载中通过本地添加一张loading图片代替加载时白屏，提高体验
 ## 添加了九宫格区域
-mui
+mui  
+图标:mdn-icon
 ## 改造了 新闻资讯 路由链接
+
 ## 新闻资讯 页面 制作
 1.绘制页面 ，使用vuetify组件中的`v-card`
 2.使用 axios 获取数据
@@ -62,17 +64,24 @@ mui
 
 
  ## 绘制图片列表组件页面结构，并设置样式
- 1.顶部横向tab bar
+ 1.顶部横向tabbar
  2.图片列表
  ### 顶部滚动条
  1.vuetify中的`v-tabs`组件
+ 2.获取请求信息渲染数据
 ## 获取所有分类，并渲染分类列表
 点击顶部tabbar获取相应分类id渲染相关列表图片 
 ## 制作图片列表区域
 ~1.懒加载~
-2.`v-img`文档：`lazy-src`
-3渲染图片列表数据
+
+2渲染图片列表数据
 ## 音乐播放组件
+1.进度条组件
+   拖动进度条改变播放时间
+
+2.显示播放时间以及总时间
+3.环形进度条设计
+
 
 ## 实现 detail 跳转图片详情页面
 
