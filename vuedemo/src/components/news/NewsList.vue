@@ -7,7 +7,7 @@
             :to="'/homepage/newsinfo/'+item.id"
             dark
             max-height="136px"
-            class="mx-auto"
+            
             color="#aaaaaa"
           >
             <v-list-item three-line>

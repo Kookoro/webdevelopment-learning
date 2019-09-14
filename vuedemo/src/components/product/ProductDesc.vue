@@ -22,9 +22,9 @@ export default {
             .then(result=>{
                 if(result.data.status === 0)
                 {
-                    console.log(result);
+                    
                     this.info = result.data.message[0];
-                    console.log(this.info.title);
+                    
                 }
             })
         }

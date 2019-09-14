@@ -65,7 +65,7 @@
                       class="confirm-btn"
                       color="#6e5b98"
                       dark
-                      @click="closeSheet();successNotice()"
+                      @click="closeSheet();successNotice();addToCart()"
                     >确定</v-btn>
                   </v-sheet>
                 </v-bottom-sheet>
@@ -159,10 +159,24 @@ export default {
     successNotice() {
       if (this.value > 0) {
         Toast({
-          message: "添加成功，在购物车等着您" + this.value,
+          message: "添加成功，在购物车等着您" ,
           iconClass: "mdi mdi-check"
         });
+         this.value = 1;
       }
+     
+    },
+    addToCart(){
+      //保存到store数组中的商品信息对象；
+      var goodsinfo = {
+        id:this.id,
+        count:this.value,
+        price:this.productinfo.sell_price,
+        checked:false,
+      } 
+       //调用store，将商品加入购物车
+       
+      this.$store.commit('addToCart',goodsinfo)
     }
   },
   components: {

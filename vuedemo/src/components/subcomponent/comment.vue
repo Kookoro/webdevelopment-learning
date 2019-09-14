@@ -13,7 +13,7 @@
       <v-row>
         <v-col >
           <v-card max-width="100%" class="mx-auto">
-            <v-list  min-width="370px">
+            <v-list  min-width="310px">
               <v-list-item-group multiple  active-class="pink--text">
                 <template v-for="item in comments">
                   <v-list-item :key="item.index">

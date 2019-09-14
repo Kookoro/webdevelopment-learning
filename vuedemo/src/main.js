@@ -42,21 +42,21 @@ export default new Vuetify({
 })
 
 // VueAwesomeSwiper 插件
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-Vue.use(VueAwesomeSwiper)
-import '../node_modules/swiper/dist/css/swiper.css'
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+Vue.use(VueAwesomeSwiper);
+import '../node_modules/swiper/dist/css/swiper.css';
 
  
 
 
 //导入vue-router路由
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 Vue.use(VueRouter); 
 
 import moment from 'moment' //moment格式化时间插件
 
 Vue.filter('dateFormat',(dataStr, pattern = "YYYY-MM-DD HH:mm:ss")=>{
-    return moment(dataStr).format(pattern)
+    return moment(dataStr).format(pattern);
 })
 //导入router.js 
 import router from './router.js';
@@ -65,8 +65,63 @@ import router from './router.js';
 import axios from 'axios'; 
 Vue.prototype.axios = axios;
 
-import preview from 'vue-preview'
+import preview from 'vue-preview';
 
+import Vuex from 'vuex';
+Vue.use(Vuex);
+var cart = JSON.parse(localStorage.getItem('cart') || '[]')
+const store = new Vuex.Store({
+    state:{
+         //this.$store.state.xxx
+        count: 0,
+        cart:[
+            //将购物车中的数据用数组保存
+          //id 
+          //conut 数量
+          //price 价格
+          //checked 是否结算  
+
+        ]
+    },
+    mutations:{
+        //操作store中的值，需要调用mutations中的值，不推荐使用$stote.state直接调用
+        //防止数据紊乱
+        // increment(state){
+        //    //this.$store.commit('xxx')
+        //     state.count++;
+        // },
+        // reduction(state){
+        //     state.count--;
+        // },
+       addToCart(state,goods){
+           //加入购物车，将商品信息保存到cart中
+           //如果购物车中，有对应商品，name，只需要更新数量
+            //如果没有，直接push到cart
+
+            //在购物车中，没有找到对应商品
+            var flag = false
+
+            state.cart.some(item=>{
+                if(item.id == goods.id){
+                    item.count += parseInt(goods.count)
+                    flag = true
+                    return true
+                }
+            })
+            //如果最终循环完得到的flag还是为false，直接把商品数据push至购物车中
+            if(flag === false){
+                state.cart.push(goods)
+            }
+
+            //当cart更新后，将其更新至localstorage中
+            localStorage.setItem('cart',JSON.stringify(state.cart))
+           
+       }
+    },
+    getters:{
+            
+    }
+})
 // 图片预览插件
 Vue.use(preview, { 
     mainClass: 'pswp--minimal--dark',
@@ -87,5 +142,6 @@ const vm = new Vue({
 
     render: c => c(app),
     router, //挂载路由对象至vm实例
-    axios,
+    axios,  //挂载axios
+    store,  //挂载store
 })

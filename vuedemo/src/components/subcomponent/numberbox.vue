@@ -31,21 +31,23 @@
                 this.$emit('on-change',val);
             },
             value:function (val) { //对值进行验证
-                this.updataValue(val);
+                this.updataValue(val); 
             }
         },
         mounted(){
             this.updataValue(this.value);
         },
         methods:{
-            handleDown: function () {  //增加
+            handleDown: function () {  //减少
                 if(this.currentValue <= this.min){
                     return;
                 }else{
                     this.currentValue -= 1;
                 }
             },
-            handleUp: function () { // 减少
+            handleUp: function () { //增加
+            
+ 
                 if(this.currentValue >= this.max){
                     return;
                 }else{
@@ -85,8 +87,8 @@
         },
         watch:{
             //属性监听max
-            'max':function(newVal,oldVal){
-                
+            'value':function(newVal,oldVal){
+                this.currentValue = this.value;
             }
         }
         

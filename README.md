@@ -8,7 +8,8 @@
  3.Mint-ui框架（按需引入） [Mint-ui](http://mint-ui.github.io/)  
 
  4 Vuetify ui框架 以及对应的谷歌Meterial design icon图标[Vuetify](https://vuetifyjs.comzh-Hans)  
- 5 vue-router [vue-router](https://router.vuejs.org)
+ 
+ 5 vue-router [vue-router](https://router.vuejs.org)  
 
  6. axios[axios](https://github.com/axios/axios)  
 ## 制作首页app组件

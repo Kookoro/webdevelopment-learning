@@ -48,7 +48,9 @@
   </div>
 </template> 
 <script>
+
 export default {
+  
   data() {
     return {
       showNav: true,
@@ -67,6 +69,7 @@ export default {
 </script>  
  
 <style scoped>
+
 .app-container {
   overflow-x: hidden;
   margin-top: 45px;
