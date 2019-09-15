@@ -48,6 +48,8 @@
                         v-model="value"
                         :max="productinfo.stock_quantity"
                         :min="1"
+                        :picactive="picactive"
+                        
                       ></numberbox>
                     </div>
 
@@ -110,12 +112,14 @@ export default {
       imgList2: [], //处理后的图片列表数组
       value: 1, //购物车数量
       productinfo: {}, //获取到的图片列表信息
-      sheet: false //底部表单切换
+      sheet: false, //底部表单切换
+      picactive:true,
     };
   },
   created() {
     this.getImg();
     this.getProductInfo();
+    
   },
   methods: {
     getImg() {
@@ -142,8 +146,12 @@ export default {
         .then(result => {
           if (result.data.status === 0) {
             this.productinfo = result.data.message[0];
+            this.sendMaxStock(this.productinfo.stock_quantity)
           }
         });
+    },
+    sendMaxStock(max){
+      this.$store.commit('getStock',max);
     },
     goDesc(id) {
       //
@@ -162,7 +170,7 @@ export default {
           message: "添加成功，在购物车等着您" ,
           iconClass: "mdi mdi-check"
         });
-         this.value = 1;
+        
       }
      
     },
@@ -176,7 +184,8 @@ export default {
       } 
        //调用store，将商品加入购物车
        
-      this.$store.commit('addToCart',goodsinfo)
+      this.$store.commit('addToCart',goodsinfo);
+      this.value = 1;
     }
   },
   components: {
@@ -194,6 +203,7 @@ export default {
 }
 .product-detail-container {
   text-align: center;
+  padding-bottom: 56px;
   .v-card__text {
     padding-top: 10px;
   }

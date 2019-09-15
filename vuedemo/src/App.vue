@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container" id="scrollWrap">
     <div>
       <v-app-bar color="#725a9c" height="45px" fixed>
         <div class="my-2">
@@ -49,8 +49,10 @@
 </template> 
 <script>
 
+
 export default {
   
+
   data() {
     return {
       showNav: true,
@@ -64,15 +66,23 @@ export default {
       this.$router.go(-1);
       this.defaultBtn = "homepage";
     }
-  }
+  },
+  
 };
 </script>  
  
 <style scoped>
-
+html,body{
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	-webkit-overflow-scrolling: touch;
+	-webkit-overflow-scrolling: touch;
+}
 .app-container {
-  overflow-x: hidden;
+  overflow-x: auto;
   margin-top: 45px;
+  
 }
 
 .footer {
@@ -100,4 +110,5 @@ export default {
 .title {
   width: 100px;
 }
+
 </style>  
