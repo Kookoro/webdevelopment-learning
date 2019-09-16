@@ -181,6 +181,7 @@ export default {
         count:this.value,
         price:this.productinfo.sell_price,
         checked:false,
+        maxStock:this.productinfo.stock_quantity,
       } 
        //调用store，将商品加入购物车
        

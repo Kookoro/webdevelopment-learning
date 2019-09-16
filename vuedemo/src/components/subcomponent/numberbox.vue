@@ -65,11 +65,13 @@ export default {
       }
     },
    
-    carthandleUp(e) {
-      if (e) {
+    carthandleUp(status) {
+        console.log(this.max);
+      if (status) {
         if (this.cartValue >= this.max) {
           return;
         } else {
+            
           this.cartValue += 1;
         }
       }

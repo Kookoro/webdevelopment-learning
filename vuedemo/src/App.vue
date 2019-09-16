@@ -3,11 +3,13 @@
     <div>
       <v-app-bar color="#725a9c" height="45px" fixed>
         <div class="my-2">
-          <v-btn class="title" text normal color="primary" @click="goback">
+          <v-btn class="title" text normal color="primary" @click="goback" :disabled="isHomePage">
             <v-icon>mdi-chevron-left</v-icon>vuedemo
+          
           </v-btn>
+           
         </div>
-        <audio id="audio"></audio>
+        
         <v-spacer></v-spacer>
       </v-app-bar>
     </div>
@@ -48,41 +50,60 @@
   </div>
 </template> 
 <script>
-
-
+import slider from '../src/components/subcomponent/slider.vue';
 export default {
-  
-
   data() {
     return {
       showNav: true,
       message: "",
-      defaultBtn: "homepage"
+      defaultBtn: "homepage",
+      isHomePage: false,
+      routeName: "homepage"
     };
   },
   methods: {
     goback() {
       //返回上一页
       this.$router.go(-1);
-      this.defaultBtn = "homepage";
+      // var i = 1;
+      // this.defaultBtn = this.$store.state.routername[ this.$store.state.routername.length-i];
+      // i = i + 1
+
+      // this.defaultBtn =
     }
   },
-  
+  watch: {
+    "$route.path": function(newVal) {
+      if (newVal === "/homepage") {
+        this.defaultBtn="homepage";
+        
+      } else if (newVal === "/cart") {
+        this.defaultBtn= "cart";
+      } else if (newVal === "/search") {
+        this.defaultBtn= "search";
+      } else if (newVal === "/account") {
+        this.defaultBtn= "account";
+      }
+    }
+  },
+  components:{
+    "music-view": slider,
+  }
 };
 </script>  
  
 <style scoped>
-html,body{
-	margin: 0;
-	height: 100%;
-	width: 100%;
-	-webkit-overflow-scrolling: touch;
-	-webkit-overflow-scrolling: touch;
+html,
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
 }
 .app-container {
   overflow-x: auto;
   margin-top: 45px;
-  
 }
 
 .footer {
@@ -110,5 +131,4 @@ html,body{
 .title {
   width: 100px;
 }
-
 </style>  

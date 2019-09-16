@@ -1,24 +1,23 @@
 <template>
   <div class="cart-container">
     <div class="productlist">
-      <v-card color="white" v-for="item in productList" :key="item.id">
+      <v-card color="white" v-for="(item,i) in productList" :key="item.id">
         <div class="left-select-btn">
           <v-checkbox
             off-icon="mdi-checkbox-blank-circle-outline"
             on-icon="mdi-checkbox-marked-circle"
             color="#6e5b98"
             hide-details
+            v-model="$store.getters.getProductChecked[item.id]"
+            @change="checkedChanged(item.id,$store.getters.getProductChecked[item.id]);checkAllChange()"
           ></v-checkbox>
         </div>
         <div class="right-product-info">
           <div class="product-pic">
-            <img
-              :src="item.thumb_path"
-              
-            />
+            <img :src="item.thumb_path" />
           </div>
           <div class="product">
-            <v-btn class="delete" elevation="0" color="#ffffff">
+            <v-btn class="delete" elevation="0" color="#ffffff" @click.prevent="remove(item.id,i)">
               <v-icon>mdi-close</v-icon>
             </v-btn>
             <div class="name">
@@ -29,12 +28,12 @@
                 <span>¥ {{item.sell_price}}</span>
               </div>
               <div class="numberbox">
-                <numberbox 
-                :initcount="$store.getters.getProductCount[item.id]"
-                :min="1"
-                :cartactive="cartactive"
-                :max="$store.state.maxStock"
-                :productId="item.id"
+                <numberbox
+                  :initcount="$store.getters.getProductCount[item.id]"
+                  :min="1"
+                  :cartactive="cartactive"
+                  :max="$store.state.cart.maxStock"
+                  :productId="item.id"
                 ></numberbox>
               </div>
             </div>
@@ -42,22 +41,22 @@
         </div>
       </v-card>
 
-     
       <v-divider></v-divider>
+      <p></p>
     </div>
 
     <div class="checkstand">
       <div class="select-all">
-        <v-checkbox label="全选" color="#6e5b98" value="red" hide-details></v-checkbox>
+        <v-checkbox label="全选" color="#6e5b98" v-model="isChecked"  hide-details @change="selectAll"></v-checkbox>
       </div>
       <div class="rightplace">
         <div class="total-price">
           合计:
-          <span>￥2399</span>
+          <span>￥{{$store.getters.getProductCountAndAmount.amount}}</span>
         </div>
         <div class="settle-btn">
           <v-btn color="#6e5b98" dark>
-            <span>结算(0)</span>
+            <span>结算({{$store.getters.getProductCountAndAmount.count}})</span>
           </v-btn>
         </div>
       </div>
@@ -78,13 +77,25 @@ export default {
       switch1: true,
       value: 1,
       productList: [],
-      cartactive:true,
+      cartactive: true,
+     checked: false,
+     isChecked:false,
+     lastRouterName:''
     };
   },
   created() {
     this.getProductlist();
   },
+  
   methods: {
+    checkAllChange(){
+      if(this.$store.state.cart.findIndex(target=>target.checked === false)===-1){
+        this.isChecked=true;
+      }else{
+        this.isChecked=false;
+       
+      }
+    },
     getProductlist() {
       console.log("121");
       var idArr = [];
@@ -98,12 +109,34 @@ export default {
             idArr.join(",")
         )
         .then(result => {
-         
           if (result.data.status === 0) {
-          
             this.productList = result.data.message;
           }
         });
+    },
+    remove(id, index) {
+      //删除
+      this.productList.splice(index, 1);
+      this.$store.commit("removeFromCart", id);
+    },
+    checkedChanged(id, val) {
+      console.log(id + "---" + val);
+      this.$store.commit("updateProductChecked", { id, checked: val });
+    },
+    selectAll() {
+      if(this.$store.state.cart.findIndex(target=>target.checked === false)===-1){
+        this.isChecked=false;
+        this.checked = false;
+        this.$store.commit("checkAll", this.checked); 
+      }else{
+       this.checked = true;
+       this.isChecked = true;
+       this.$store.commit("checkAll", this.checked); 
+       
+      }
+      // this.isChecked = !this.isChecked;
+      // this.checked = !this.checked
+      // this.$store.commit("checkAll", this.checked); 
     }
   },
   computed: {
@@ -114,19 +147,14 @@ export default {
   components: {
     numberbox
   },
-  beforeRouteEnter(to, from, next) {
-    var route = from.path.slice(1);
-    next(vm => {
-      vm.$data.routername = route;
-      console.log(vm.$data.routername);
-    });
-  }
+
+ 
 };
 </script>
 <style lang="scss">
 .cart-container {
   padding-top: 20px;
-  
+
   margin-bottom: 112px;
   padding-bottom: 10px;
 

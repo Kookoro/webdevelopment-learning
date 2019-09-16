@@ -188,7 +188,8 @@ export default {
     };
   },
   created() {
-    this.getAllImg()
+    this.getAllImg();
+    
   },
   mounted() {
     // this.getFirstImg();
@@ -197,6 +198,7 @@ export default {
     // this.getAllImg();
     document.getElementById("audio").pause();
     this.changeProgress();
+    
   },
 
   methods: {
@@ -253,14 +255,7 @@ export default {
       this.flag = false;
       this.interval = 4000;
     },
-    getmusic() {
-      this.axios
-        .get("https://v1.itooi.cn/netease/song?id=1304688448")
-        .then(result => {
-          console.log(result);
-        });
-        document.get
-    },
+    
     changeStart() {
       this.isStore = !this.isStore;
       const audio = document.getElementById("audio");
@@ -293,6 +288,7 @@ export default {
     }
 
   },
+  
 
   components: {
     "back-to-top-button": backtotop,

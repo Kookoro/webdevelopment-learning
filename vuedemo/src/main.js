@@ -74,15 +74,16 @@ const store = new Vuex.Store({
     state: {
         //this.$store.state.xxx
         count: 0,
-        cart: [
+        cart: cart,
             //将购物车中的数据用数组保存
             //id 
             //conut 数量
             //price 价格
             //checked 是否结算  
 
-        ],
-        maxStock:'',
+        
+        maxStock: '',
+      
     },
     mutations: {
         //操作store中的值，需要调用mutations中的值，不推荐使用$stote.state直接调用
@@ -118,36 +119,80 @@ const store = new Vuex.Store({
             localStorage.setItem('cart', JSON.stringify(state.cart))
 
         },
-       updateProductInfo(state,productInfo){
-        //修改数量值
-        state.cart.some(item=>{
-            if(item.id == productInfo.id){
-                item.count = parseInt(productInfo.count)
-                return true
-            }
-        })
-        //修改完商品数量后保存至localstorage
-        localStorage.setItem('cart', JSON.stringify(state.cart))
-       },
-        getStock(state,max){
+        updateProductInfo(state, productInfo) {
+            //修改数量值
+            state.cart.some(item => {
+                if (item.id == productInfo.id) {
+                    item.count = parseInt(productInfo.count)
+                    return true
+                }
+            })
+            //修改完商品数量后保存至localstorage
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
+        getStock(state, max) {
             state.maxStock = max;
 
-        }
+        },
+        removeFromCart(state, id) {
+            state.cart.some(item => {
+                if (item.id == id) {
+                    state.cart.splice(this.i, 1)
+                    return true;
+                }
+            })
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
+        updateProductChecked(state,info){
+            state.cart.some(item=>{
+                if(item.id == info.id){
+                    item.checked = info.checked
+                }
+            }) 
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
+        checkAll(state,data){
+            this.state.cart.some(item=>{
+                item.checked = data;
+            })
+            localStorage.setItem('cart', JSON.stringify(state.cart))
+        },
+       
     },
     getters: {
         getAllCount(state) {
             var c = 0;
             state.cart.forEach(item => {
-                c += item.count
+                c += item.count;
             })
             return c;
         },
         getProductCount(state) {
             var o = {};
             state.cart.forEach(item => {
-                o[item.id] = item.count
+                o[item.id] = item.count;
             })
-            return o
+            return o;
+        },
+        getProductChecked(state){
+            var o = {}
+            state.cart.forEach(item=>{
+                o[item.id] = item.checked;
+            })
+            return o;
+        },
+        getProductCountAndAmount(state){
+            var e = {
+                count:0,
+                amount:0,
+            }
+            state.cart.forEach(item=>{
+                if(item.checked){
+                    e.count += item.count
+                    e.amount += item.price * item.count
+                }
+            })
+            return e;
         }
     }
 })
