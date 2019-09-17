@@ -1,63 +1,62 @@
 <!-- 播放器组件 -->
 <template>
-
   <div>
-    
-    <div class="bar">
+    <div>
+      <div class="musicimg-container">
+
+        <img src="https://images2015.cnblogs.com/blog/998023/201706/998023-20170610103617278-75811825.png" alt="">
+
+      </div>
       <div class="progressbar" @click="playMusic" ref="runfatbar">
-        <div class="greenbar" ref="runbar">
-          <span class="yuan" draggable="true"></span>
+        <div class="bar">
+          <div class="greenbar" ref="runbar">
+            <span class="yuan" draggable="true"></span>
+          </div>
         </div>
       </div>
-      <div class="circleProgress_container">
+      <div class="time-container">
+        <div class="time-text">{{cTime}}</div>
+        <div class="audio-btn">
+          <v-list-item-icon>
+            <v-btn icon>
+              <v-icon>mdi-skip-previous</v-icon>
+            </v-btn>
+          </v-list-item-icon>
 
-        <div class="circleProgress_wrapper">
-      <div class="wrapper right">
-        <div class="circleProgress rightcircle" ref="yuanright"></div>
-      </div>
-      <div class="wrapper left">
-        <div class="circleProgress leftcircle" ref="yuanleft"></div>
-      </div>
-    </div>
-      </div>
-      
-      
-    </div>
-    <div class="time-container">
-      <div class="time-text">{{cTime}}</div>
-         <div class="audio-btn">
-      <v-list-item-icon>
-        <v-btn icon >
-          <v-icon>mdi-skip-previous</v-icon>
-        </v-btn>
-      </v-list-item-icon>
+          <v-list-item-icon>
+            <div class="circleProgress_container">
+              <div class="circleProgress_wrapper">
+                <div class="wrapper right">
+                  <div class="circleProgress rightcircle" ref="yuanright"></div>
+                </div>
+                <div class="wrapper left">
+                  <div class="circleProgress leftcircle" ref="yuanleft"></div>
+                </div>
+              </div>
+            </div>
+            <v-btn icon @click="audioState">
+              <v-icon v-show="downIcon">mdi-play</v-icon>
+              <v-icon v-show="!downIcon">mdi-pause</v-icon>
+            </v-btn>
+          </v-list-item-icon>
 
-      <v-list-item-icon>
-        <v-btn icon  @click="audioState">
-          <v-icon v-show="downIcon">mdi-play</v-icon>
-          <v-icon  v-show="!downIcon">mdi-pause</v-icon>
-        </v-btn>
-      </v-list-item-icon>
-
-      <v-list-item-icon>
-        <v-btn  icon @click=" switchAudio('bottom')">
-          <v-icon >mdi-skip-next</v-icon>
-        </v-btn>
-      </v-list-item-icon>
-      <!-- <i class="icon icon-left" @click="switchAudio('top')"></i>
+          <v-list-item-icon>
+            <v-btn icon @click=" switchAudio('bottom')">
+              <v-icon>mdi-skip-next</v-icon>
+            </v-btn>
+          </v-list-item-icon>
+          <!-- <i class="icon icon-left" @click="switchAudio('top')"></i>
       <i :class="play ? 'icon icon-stop' : 'icon icon-play'" @click="audioState"></i>
-      <i class="icon icon-right2" @click="switchAudio('bottom')"></i>-->
-    </div>
-      <div class="right-time time-text">{{dTime}}</div>
-    </div>
+          <i class="icon icon-right2" @click="switchAudio('bottom')"></i>-->
+        </div>
+        <div class="right-time time-text">{{dTime}}</div>
+      </div>
 
- 
-    <div>
-      <audio ref="player" :src="audioHttp"></audio>
+      <div>
+        <audio ref="player" :src="audioHttp"></audio>
+      </div>
     </div>
-    
     <!-- 这里是圆形进度条 -->
-    
   </div>
 </template>
 <script>
@@ -76,7 +75,22 @@ export default {
       cTime: "00:00", // 已播放时间
       dTime: "00:00", // 总播放时间
       play: false, // 播放暂停按钮
-      audioHttp: "http://music.163.com/song/media/outer/url?id=666108.mp3" // 音频链接
+      audioHttp: "http://music.163.com/song/media/outer/url?id=666108.mp3", // 音频链接
+      progress: 0,
+      slider: 40,
+      downIcon: true,
+      interval: 1000,
+      audio1: {
+        // 该字段是音频是否处于播放状态的属性
+        playing: false,
+
+        // 音频当前播放时长
+        currentTime: 0,
+        // 音频最大播放时长
+        maxTime: 0,
+        minTime: 0,
+        step: 0.1
+      }
     };
   },
 
@@ -105,44 +119,52 @@ export default {
     });
 
     // 获得音频正在播放时的处理
-    music.addEventListener("timeupdate", () => {
-      const musicTime = music.duration; // 获得音频时长
-      const circleTime = musicTime / 360; // 计算总时长占据360度每一度的比例
-      const stopTime = music.currentTime; // 获得已播放的音频时长
-      const rightDeg = -135 + stopTime / circleTime; // 计算出当前旋转度数
-      if (rightDeg < 45) {
-        // 如果当前度数小于45就证明在右边
-        rightCircle.display = "block"; // 显示右边圆
-        rightCircle.transform = `rotate(${rightDeg}deg)`; // 赋值给CSS右边圆旋转度数
-        leftCircle.display = "none"; // 隐藏左边园（预防切歌的时候右边已清除）
-      } else if (rightDeg === 45 || rightDeg > 45) {
-        // 如果当前度数等于或大于45就证明在左边
-        rightCircle.display = "block"; // 显示右边圆（预防直接点击快进的时候右边无显示）
-        leftCircle.display = "block"; // 显示左边圆
-        rightCircle.transform = "rotate(45deg)"; // 固定右边旋转度数
-        const leftDeg = -135 + (stopTime - musicTime / 2) / circleTime; // 计算出当前左边旋转度数
-        leftCircle.transform = `rotate(${leftDeg}deg)`; // 赋值给CSS右边圆旋转度数
-      }
-      musicBar.style.width = `${(stopTime / musicTime) * 100}%`; // 计算进度条所在比例宽度
-      const branch = Math.floor(stopTime / 60); // 计算已播放的音频分钟
-      const second = Math.floor(stopTime % 60); // 计算已播放的音频秒
-      if (branch < 10 && second < 10) {
-        // 四种情况判断显示音频以播放时间
-        this.cTime = `0${branch}:0${second}`;
-      } else if (branch < 10) {
-        this.cTime = `0${branch}:${second}`;
-      } else if (second < 10) {
-        this.cTime = `${branch}:0${second}`;
-      } else {
-        this.cTime = `${branch}:${second}`;
-      }
-    },{passive:true});
+    music.addEventListener(
+      "timeupdate",
+      () => {
+        const musicTime = music.duration; // 获得音频时长
+        const circleTime = musicTime / 360; // 计算总时长占据360度每一度的比例
+        const stopTime = music.currentTime; // 获得已播放的音频时长
+        const rightDeg = -135 + stopTime / circleTime; // 计算出当前旋转度数
+        if (rightDeg < 45) {
+          // 如果当前度数小于45就证明在右边
+          rightCircle.display = "block"; // 显示右边圆
+          rightCircle.transform = `rotate(${rightDeg}deg)`; // 赋值给CSS右边圆旋转度数
+          leftCircle.display = "none"; // 隐藏左边园（预防切歌的时候右边已清除）
+        } else if (rightDeg === 45 || rightDeg > 45) {
+          // 如果当前度数等于或大于45就证明在左边
+          rightCircle.display = "block"; // 显示右边圆（预防直接点击快进的时候右边无显示）
+          leftCircle.display = "block"; // 显示左边圆
+          rightCircle.transform = "rotate(45deg)"; // 固定右边旋转度数
+          const leftDeg = -135 + (stopTime - musicTime / 2) / circleTime; // 计算出当前左边旋转度数
+          leftCircle.transform = `rotate(${leftDeg}deg)`; // 赋值给CSS右边圆旋转度数
+        }
+        musicBar.style.width = `${(stopTime / musicTime) * 100}%`; // 计算进度条所在比例宽度
+        const branch = Math.floor(stopTime / 60); // 计算已播放的音频分钟
+        const second = Math.floor(stopTime % 60); // 计算已播放的音频秒
+        if (branch < 10 && second < 10) {
+          // 四种情况判断显示音频以播放时间
+          this.cTime = `0${branch}:0${second}`;
+        } else if (branch < 10) {
+          this.cTime = `0${branch}:${second}`;
+        } else if (second < 10) {
+          this.cTime = `${branch}:0${second}`;
+        } else {
+          this.cTime = `${branch}:${second}`;
+        }
+      },
+      { passive: true }
+    );
     // 监听颜色进度条是否触摸拖动
-    musicBar.addEventListener("touchmove", event => {
-      const events = event.targetTouches[0].pageX; // 获得触摸拖动的距离
-      musicBar.style.width = `${(events / musicWidth) * 100}%`; // 计算进度条所在比例宽度
-      music.pause(); // 触摸拖动时停止播放
-    },{passive:true});
+    musicBar.addEventListener(
+      "touchmove",
+      event => {
+        const events = event.targetTouches[0].pageX; // 获得触摸拖动的距离
+        musicBar.style.width = `${(events / musicWidth) * 100}%`; // 计算进度条所在比例宽度
+        music.pause(); // 触摸拖动时停止播放
+      },
+      { passive: true }
+    );
 
     // 监听颜色进度条是否触摸拖动结束
     musicBar.addEventListener("touchend", () => {
@@ -193,38 +215,58 @@ export default {
 
     // 切换歌曲按钮
     switchAudio(value) {
-      const music = this.$refs.player; 
+      const music = this.$refs.player;
       if (value === "top") {
         this.audioHttp =
           "https://v1.itooi.cn/netease/url?id=411349067&quality=flac";
       } else if (value === "bottom") {
         this.audioHttp =
           "https://v1.itooi.cn/netease/url?id=31365070&quality=flac";
-          this.downIcon = !false;
-         
-          
+        this.downIcon = !false;
       }
-      music.play()
+      music.play();
       this.play = false; // 播放按钮为暂停
       this.$refs.runbar.style.width = 0; // 清空颜色进度条
       this.$refs.yuanright.style.display = "none"; // 清空圆形颜色进度条
       this.$refs.yuanleft.style.display = "none"; // 清空圆形颜色进度条
+    },
+    changeStart() {
+      this.isStore = !this.isStore;
+      const audio = document.getElementById("audio");
+      if (!this.isStore) {
+        audio.play();
+        this.downIcon = !this.downIcon;
+      } else {
+        audio.pause();
+        this.downIcon = !this.downIcon;
+      }
+    },
+    changeProgress() {
+      const audio = document.getElementById("audio");
+      const timer = setInterval(() => {
+        const numbers = audio.currentTime / audio.duration;
+        let perNumber = (numbers * 100).toFixed(5);
+        this.progress = perNumber;
+        if (perNumber >= 100) {
+          this.isStore = true;
+          this.progress = 0;
+          this.downIcon = true;
+          clearInterval(timer);
+        }
+      }, 30);
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.circleProgress_container{
-  position: relative;
-  bottom: 3px;
-  
+.circleProgress_container {
+  position: absolute;
 }
 .circleProgress_wrapper {
   width: 40px;
   height: 40px;
-  margin: 20px auto;
+
   position: relative;
-  
 }
 
 .wrapper {
@@ -253,33 +295,32 @@ export default {
 }
 
 .rightcircle {
-  border-top: 4px solid  #6e5b98;
-  border-right: 4px solid  #6e5b98;
+  border-top: 4px solid #6e5b98;
+  border-right: 4px solid #6e5b98;
   right: 0;
   transform: rotate(-135deg);
   display: none;
 }
 
 .leftcircle {
-  border-bottom: 4px solid  #6e5b98;
-  border-left: 4px solid  #6e5b98;
+  border-bottom: 4px solid #6e5b98;
+  border-left: 4px solid #6e5b98;
   left: 0;
   transform: rotate(-135deg);
   display: none;
 }
-
+.time-container {
+  height: 100px;
+}
 .bar {
   width: 100%;
-  height: 20px;
+  height: 10px;
   line-height: 30px;
-  
-  
 
   .progressbar {
     width: 100%;
     height: 3px;
     background-color: #9e9e9e;
-    position: relative;
   }
 
   .greenbar {
@@ -308,28 +349,28 @@ export default {
   width: 50%;
   box-sizing: border-box;
   color: #757575;
-  text-align: center
+  text-align: center;
 }
 
-.time-container{
+.time-container {
   display: flex;
   justify-content: center;
-  align-items:center;
-  
-  .v-list-item__icon{
-   margin: 0;
+  align-items: center;
+
+  .v-list-item__icon {
+    margin: 0;
   }
 }
 
 .audio-btn {
   width: 100%;
   text-align: center;
-  .v-btn{
+  .v-btn {
     width: 40px;
     height: 40px;
   }
-  .v-btn-toggle{
-   background-color: #6e5b98;
+  .v-btn-toggle {
+    background-color: #6e5b98;
   }
 }
 </style>

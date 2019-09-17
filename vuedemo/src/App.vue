@@ -4,13 +4,22 @@
       <v-app-bar color="#725a9c" height="45px" fixed>
         <div class="my-2">
           <v-btn class="title" text normal color="primary" @click="goback" :disabled="isHomePage">
-            <v-icon>mdi-chevron-left</v-icon>vuedemo
-          
+            <v-icon>mdi-chevron-left</v-icon>
+vuedemo
           </v-btn>
-           
         </div>
-        
+
         <v-spacer></v-spacer>
+
+        <!-- <v-bottom-sheet hide-overlay transition="scroll-y-transition">
+          <template v-slot:activator="{ on }">
+            <v-btn color="purple" dark v-on="on" @click="alerti">Open Usage</v-btn>
+          </template>
+          <v-sheet class="text-center" height="90px" data-app="true">
+            <music-view></music-view>
+          </v-sheet>
+        </v-bottom-sheet> -->
+       
       </v-app-bar>
     </div>
 
@@ -50,7 +59,7 @@
   </div>
 </template> 
 <script>
-import slider from '../src/components/subcomponent/slider.vue';
+import slider from "../src/components/subcomponent/slider.vue";
 export default {
   data() {
     return {
@@ -58,7 +67,8 @@ export default {
       message: "",
       defaultBtn: "homepage",
       isHomePage: false,
-      routeName: "homepage"
+      routeName: "homepage",
+      expand: false,
     };
   },
   methods: {
@@ -70,24 +80,26 @@ export default {
       // i = i + 1
 
       // this.defaultBtn =
+    },
+    alerti(){
+      console.log('1');
     }
   },
   watch: {
     "$route.path": function(newVal) {
       if (newVal === "/homepage") {
-        this.defaultBtn="homepage";
-        
+        this.defaultBtn = "homepage";
       } else if (newVal === "/cart") {
-        this.defaultBtn= "cart";
+        this.defaultBtn = "cart";
       } else if (newVal === "/search") {
-        this.defaultBtn= "search";
+        this.defaultBtn = "search";
       } else if (newVal === "/account") {
-        this.defaultBtn= "account";
+        this.defaultBtn = "account";
       }
     }
   },
-  components:{
-    "music-view": slider,
+  components: {
+    "music-view": slider
   }
 };
 </script>  
@@ -100,6 +112,10 @@ body {
   width: 100%;
   -webkit-overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
+}
+.card{
+  position: absolute;
+  
 }
 .app-container {
   overflow-x: auto;

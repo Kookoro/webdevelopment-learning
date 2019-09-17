@@ -63,14 +63,9 @@
     <button @click="show">查询天气</button>
     <v-app id="app">
       <div class="text-center"> 
-      <v-bottom-sheet hide-overlay>
-        <template v-slot:activator="{ on }">
-          <v-btn color="purple" dark v-on="on">Open Usage</v-btn>
-        </template>
-        <v-sheet class="text-center" height="95px" data-app="true">
-          <music-view></music-view>
-        </v-sheet>
-      </v-bottom-sheet>
+        <v-card>
+        <music-view></music-view>
+        </v-card>
       </div>
     </v-app>
     <div>
@@ -170,21 +165,7 @@ export default {
       imgURL: require("../../images/loading.gif"),
       playedTime: 0,
       isStore: true,
-      progress: 0,
-      slider: 40,
-      downIcon: true,
-      interval: 1000,
-      audio1: {
-        // 该字段是音频是否处于播放状态的属性
-        playing: false,
-
-        // 音频当前播放时长
-        currentTime: 0,
-        // 音频最大播放时长
-        maxTime: 0,
-        minTime: 0,
-        step: 0.1
-      }
+    
     };
   },
   created() {
@@ -196,8 +177,8 @@ export default {
     // this.getSecondImg();
     // this.getThirdImg();
     // this.getAllImg();
-    document.getElementById("audio").pause();
-    this.changeProgress();
+    
+    
     
   },
 
@@ -256,31 +237,7 @@ export default {
       this.interval = 4000;
     },
     
-    changeStart() {
-      this.isStore = !this.isStore;
-      const audio = document.getElementById("audio");
-      if (!this.isStore) {
-        audio.play();
-        this.downIcon = !this.downIcon;
-      } else {
-        audio.pause();
-        this.downIcon = !this.downIcon;
-      }
-    },
-    changeProgress() {
-      const audio = document.getElementById("audio");
-      const timer = setInterval(() => {
-        const numbers = audio.currentTime / audio.duration;
-        let perNumber = (numbers * 100).toFixed(5);
-        this.progress = perNumber;
-        if (perNumber >= 100) {
-          this.isStore = true;
-          this.progress = 0;
-          this.downIcon = true;
-          clearInterval(timer);
-        }
-      }, 30);
-    },
+    
  
     getValue() {
       console.log(this.slider);
