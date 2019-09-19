@@ -15,21 +15,7 @@
       </div>
      
     </router-link>
-    <!-- <div   class="product-item" v-for="item in productlist" :key="item.id" @click="toDetail(item.id)">
-      <img :src="item.img_url" class="product-pic" alt="加载失败" />
-      <h1 class="title">{{item.title}}</h1>
-      <div class="product-info">
-        <p class="product-price">
-          <span class="now-price">￥{{item.sell_price}}</span>
-          <span class="old-price">￥{{item.market_price}}</span>
-        </p>
-        <p class="product-sell">
-          <span>热卖中</span> 
-          <span>剩{{item.stock_quantity}}件</span>
-        </p>
-      </div>
-     
-    </div>  -->
+
      <v-btn block color="#6e5b98" @click="getMoreProduct" dark>加载更多</v-btn>
   </div>
 </template>

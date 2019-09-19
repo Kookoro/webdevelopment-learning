@@ -2,11 +2,7 @@
 <template>
   <div>
     <div>
-      <div class="musicimg-container">
-
-   
-
-      </div>
+      <div class="musicimg-container"></div>
       <div class="progressbar" @click="playMusic" ref="runfatbar">
         <div class="bar">
           <div class="greenbar" ref="runbar">
@@ -14,11 +10,11 @@
           </div>
         </div>
       </div>
-      
+
       <div class="time-container">
         <div class="time-text">{{cTime}}</div>
         <div class="audio-btn">
-          <v-list-item-icon>
+          <v-list-item-icon @click="switchAudio('top')">
             <v-btn icon>
               <v-icon>mdi-skip-previous</v-icon>
             </v-btn>
@@ -42,19 +38,16 @@
           </v-list-item-icon>
 
           <v-list-item-icon>
-            <v-btn icon @click=" switchAudio('bottom')">
+            <v-btn icon @click="switchAudio('bottom')">
               <v-icon>mdi-skip-next</v-icon>
             </v-btn>
           </v-list-item-icon>
-          <!-- <i class="icon icon-left" @click="switchAudio('top')"></i>
-      <i :class="play ? 'icon icon-stop' : 'icon icon-play'" @click="audioState"></i>
-          <i class="icon icon-right2" @click="switchAudio('bottom')"></i>-->
         </div>
         <div class="right-time time-text">{{dTime}}</div>
       </div>
 
       <div>
-        <audio ref="player" :src="audioHttp"></audio>
+        <audio ref="player" :src="musicList[id].url"></audio>
       </div>
     </div>
     <!-- 这里是圆形进度条 -->
@@ -72,6 +65,7 @@ export default {
 
   data() {
     return {
+      id:0,
       downIcon: true,
       cTime: "00:00", // 已播放时间
       dTime: "00:00", // 总播放时间
@@ -81,6 +75,28 @@ export default {
       slider: 40,
       downIcon: true,
       interval: 1000,
+      musicList:[
+        {
+          url:"http://music.163.com/song/media/outer/url?id=666108.mp3"
+        },
+        {
+          url:"http://music.163.com/song/media/outer/url?id=27770723.mp3"
+        },
+        {
+          url:"http://music.163.com/song/media/outer/url?id=34497243.mp3"
+        },
+        {
+          url:"http://music.163.com/song/media/outer/url?id=454711161.mp3"
+        },
+        {
+          url:"http://music.163.com/song/media/outer/url?id=439076801.mp3"
+        },
+      
+
+
+
+
+      ],
       audio1: {
         // 该字段是音频是否处于播放状态的属性
         playing: false,
@@ -127,6 +143,7 @@ export default {
         const circleTime = musicTime / 360; // 计算总时长占据360度每一度的比例
         const stopTime = music.currentTime; // 获得已播放的音频时长
         const rightDeg = -135 + stopTime / circleTime; // 计算出当前旋转度数
+        
         if (rightDeg < 45) {
           // 如果当前度数小于45就证明在右边
           rightCircle.display = "block"; // 显示右边圆
@@ -152,6 +169,21 @@ export default {
           this.cTime = `${branch}:0${second}`;
         } else {
           this.cTime = `${branch}:${second}`;
+        }
+        if(stopTime == musicTime)
+        {
+           if(this.id>=this.musicList.length-1){
+              this.id=0;
+               
+              this.switchAudio('bottom');
+            }
+            else{
+              this.id++;
+               
+              this.switchAudio('bottom');
+
+            }
+          
         }
       },
       { passive: true }
@@ -199,6 +231,8 @@ export default {
       music.play(); // 播放音频
       this.play = true; // 更改播放暂停按钮为播放
       this.downIcon = false;
+     
+          
     },
 
     // 点击播放暂停按钮时间
@@ -206,7 +240,7 @@ export default {
       this.play = !this.play; // 更改播放暂停按钮状态
       const music = this.$refs.player; // 音频所在对象
       if (this.play) {
-        music.play(); // 播放音乐
+        music.play(); // 播放音
         this.downIcon = false;
       } else {
         music.pause(); // 暂停音乐
@@ -218,14 +252,21 @@ export default {
     switchAudio(value) {
       const music = this.$refs.player;
       if (value === "top") {
-        this.audioHttp =
-          "https://v1.itooi.cn/netease/url?id=411349067&quality=flac";
+       if(this.id<=0)
+       {
+         this.id = this.musicList.length-1;
+         this.downIcon = !false;
+       }
+       else{
+         this.id--;
+         this.downIcon = !false;
+
+       }
       } else if (value === "bottom") {
-        this.audioHttp =
-          "https://v1.itooi.cn/netease/url?id=31365070&quality=flac";
+        this.id++;
         this.downIcon = !false;
       }
-      music.play();
+      
       this.play = false; // 播放按钮为暂停
       this.$refs.runbar.style.width = 0; // 清空颜色进度条
       this.$refs.yuanright.style.display = "none"; // 清空圆形颜色进度条
@@ -252,6 +293,8 @@ export default {
           this.isStore = true;
           this.progress = 0;
           this.downIcon = true;
+           
+           
           clearInterval(timer);
         }
       }, 30);
