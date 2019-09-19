@@ -47,7 +47,7 @@
 
     <div class="checkstand">
       <div class="select-all">
-        <v-checkbox label="全选" color="#6e5b98" v-model="isChecked"  hide-details @change="selectAll"></v-checkbox>
+        <v-checkbox label="全选" color="#6e5b98" v-model="isChecked" hide-details @change="selectAll"></v-checkbox>
       </div>
       <div class="rightplace">
         <div class="total-price">
@@ -64,10 +64,6 @@
   </div>
 </template>
 <script>
-// import Vue from 'vue'
-// import Vuetify from 'vuetify'
-// import 'vuetify/dist/vuetify.min.css'
-// Vue.use(Vuetify)
 import numberbox from "../subcomponent/numberbox.vue";
 export default {
   data() {
@@ -78,22 +74,23 @@ export default {
       value: 1,
       productList: [],
       cartactive: true,
-     checked: false,
-     isChecked:false,
-     lastRouterName:''
+      checked: false,
+      isChecked: false
     };
   },
   created() {
     this.getProductlist();
   },
-  
+
   methods: {
-    checkAllChange(){
-      if(this.$store.state.cart.findIndex(target=>target.checked === false)===-1){
-        this.isChecked=true;
-      }else{
-        this.isChecked=false;
-       
+    checkAllChange() {
+      if (
+        this.$store.state.cart.findIndex(target => target.checked === false) ===
+        -1
+      ) {
+        this.isChecked = true;
+      } else {
+        this.isChecked = false;
       }
     },
     getProductlist() {
@@ -120,23 +117,21 @@ export default {
       this.$store.commit("removeFromCart", id);
     },
     checkedChanged(id, val) {
-      console.log(id + "---" + val);
       this.$store.commit("updateProductChecked", { id, checked: val });
     },
     selectAll() {
-      if(this.$store.state.cart.findIndex(target=>target.checked === false)===-1){
-        this.isChecked=false;
+      if (
+        this.$store.state.cart.findIndex(target => target.checked === false) ===
+        -1
+      ) {
+        this.isChecked = false;
         this.checked = false;
-        this.$store.commit("checkAll", this.checked); 
-      }else{
-       this.checked = true;
-       this.isChecked = true;
-       this.$store.commit("checkAll", this.checked); 
-       
+        this.$store.commit("checkAll", this.checked);
+      } else {
+        this.checked = true;
+        this.isChecked = true;
+        this.$store.commit("checkAll", this.checked);
       }
-      // this.isChecked = !this.isChecked;
-      // this.checked = !this.checked
-      // this.$store.commit("checkAll", this.checked); 
     }
   },
   computed: {
@@ -146,9 +141,7 @@ export default {
   },
   components: {
     numberbox
-  },
-
- 
+  }
 };
 </script>
 <style lang="scss">

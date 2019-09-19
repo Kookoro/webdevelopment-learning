@@ -4,22 +4,11 @@
       <v-app-bar color="#725a9c" height="45px" fixed>
         <div class="my-2">
           <v-btn class="title" text normal color="primary" @click="goback" :disabled="isHomePage">
-            <v-icon>mdi-chevron-left</v-icon>
-vuedemo
+            <v-icon>mdi-chevron-left</v-icon>vuedemo
           </v-btn>
         </div>
 
         <v-spacer></v-spacer>
-
-        <!-- <v-bottom-sheet hide-overlay transition="scroll-y-transition">
-          <template v-slot:activator="{ on }">
-            <v-btn color="purple" dark v-on="on" @click="alerti">Open Usage</v-btn>
-          </template>
-          <v-sheet class="text-center" height="90px" data-app="true">
-            <music-view></music-view>
-          </v-sheet>
-        </v-bottom-sheet> -->
-       
       </v-app-bar>
     </div>
 
@@ -38,7 +27,7 @@ vuedemo
       <router-link tag="div" to="/weather" class="reset-height">
         <v-btn value="weather">
           <span>天气</span>
-          <v-icon> mdi-white-balance-sunny</v-icon>
+          <v-icon>mdi-white-balance-sunny</v-icon>
         </v-btn>
       </router-link>
 
@@ -68,7 +57,7 @@ export default {
       defaultBtn: "homepage",
       isHomePage: false,
       routeName: "homepage",
-      expand: false,
+      expand: false
     };
   },
   methods: {
@@ -80,9 +69,6 @@ export default {
       // i = i + 1
 
       // this.defaultBtn =
-    },
-    alerti(){
-      console.log('1');
     }
   },
   watch: {
@@ -113,9 +99,8 @@ body {
   -webkit-overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
 }
-.card{
+.card {
   position: absolute;
-  
 }
 .app-container {
   overflow-x: auto;

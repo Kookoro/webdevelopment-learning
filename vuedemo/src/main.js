@@ -79,8 +79,7 @@ const store = new Vuex.Store({
             //id 
             //conut 数量
             //price 价格
-            //checked 是否结算  
-
+            //checked 是否结算 
         
         maxStock: '',
       
@@ -88,13 +87,6 @@ const store = new Vuex.Store({
     mutations: {
         //操作store中的值，需要调用mutations中的值，不推荐使用$stote.state直接调用
         //防止数据紊乱
-        // increment(state){
-        //    //this.$store.commit('xxx')
-        //     state.count++;
-        // },
-        // reduction(state){
-        //     state.count--;
-        // },
         addToCart(state, goods) {
             //加入购物车，将商品信息保存到cart中
             //如果购物车中，有对应商品，name，只需要更新数量
