@@ -4,7 +4,7 @@
     <div>
       <div class="musicimg-container">
 
-        <img src="https://images2015.cnblogs.com/blog/998023/201706/998023-20170610103617278-75811825.png" alt="">
+   
 
       </div>
       <div class="progressbar" @click="playMusic" ref="runfatbar">
@@ -14,6 +14,7 @@
           </div>
         </div>
       </div>
+      
       <div class="time-container">
         <div class="time-text">{{cTime}}</div>
         <div class="audio-btn">

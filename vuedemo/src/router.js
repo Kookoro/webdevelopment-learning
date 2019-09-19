@@ -2,7 +2,7 @@
 import VueRouter from 'vue-router'
 //导入对应组件
 import HomePage from './components/tabbar/HomePage.vue'
-import Search from './components/tabbar/SearchContainer.vue'
+import Weather from './components/tabbar/WeatherContainer.vue'
 import Cart from './components/tabbar/CartContainer.vue'
 import Account from './components/tabbar/AccountContainer.vue'
 import NewsList from './components/news/NewsList.vue'
@@ -24,8 +24,8 @@ var router = new VueRouter({
       component: HomePage
     },
     { 
-      path: '/search',
-      component: Search
+      path: '/weather',
+      component: Weather
     },
     {
       path: '/cart',

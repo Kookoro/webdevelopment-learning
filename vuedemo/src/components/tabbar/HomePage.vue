@@ -64,7 +64,10 @@
     <v-app id="app">
       <div class="text-center"> 
         <v-card>
-        <music-view></music-view>
+          
+        <music-view>
+          <audio id="audio"></audio>
+        </music-view>
         </v-card>
       </div>
     </v-app>

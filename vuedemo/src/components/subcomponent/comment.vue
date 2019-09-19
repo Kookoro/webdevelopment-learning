@@ -19,8 +19,10 @@
                   <v-list-item :key="item.index">
                     <template v-slot:default="{ active, toggle }">
                       <v-list-item-content>
-                        <v-list-item-title v-text="item.user_name"></v-list-item-title>
-                        <v-list-item-subtitle class="text--primary" v-text="item.content" title="111111"></v-list-item-subtitle>
+                        <v-listit-item-title v-text="item.user_name"></v-listit-item-title>
+                        <v-list-item-subtitle class="text--primary"><span class="commit">
+                          {{item.content }}
+                          </span></v-list-item-subtitle>
                       </v-list-item-content>
 
                       <v-list-item-action>
@@ -31,7 +33,7 @@
                       </v-list-item-action>
                     </template>
                   </v-list-item>
-                  <v-divider :key="item.id"></v-divider>
+                  <v-divider :key="item.id"></v-divider> 
                 </template>
               </v-list-item-group>
             </v-list>
@@ -156,5 +158,6 @@ a {
 .v-input {
   color: #eeeeee;
 }
+
 
 </style> 

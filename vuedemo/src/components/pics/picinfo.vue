@@ -14,7 +14,7 @@
     <div class="content display-4" v-html="picInfo.content"></div>
     <!-- 评论子组件 -->
     <cmt-box :id="id"></cmt-box>-
-    <back-to-top></back-to-top> 
+    <back-to-top></back-to-top>
   </div>
 </template>
 <script>
@@ -25,9 +25,7 @@ export default {
     return {
       id: this.$route.params.id,
       picInfo: {},
-      list: [
-        
-      ]
+      list: []
     };
   },
   created() {
@@ -56,11 +54,11 @@ export default {
         .then(result => {
           if (result.data.status === 0) {
             //循环每个图片数据，不全图片的宽高
-            result.data.message.forEach(item=>{
+            result.data.message.forEach(item => {
               item.w = 1000;
-              item.h = 720; 
-              item.src = item.src;  //大图
-              item.msrc = item.src;  //小图
+              item.h = 720;
+              item.src = item.src; //大图
+              item.msrc = item.src; //小图
             });
             this.list = result.data.message;
           }
@@ -73,11 +71,18 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped> 
+<style lang="scss" scoped>
 .picInfo-container {
-  padding: 5px; 
+  padding: 5px;
   margin-bottom: 56px;
-  
+
+  .preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+
   h3 {
     color: #6e6e6e;
     font-size: 18px;
@@ -94,13 +99,13 @@ export default {
     font-size: 13px;
     line-height: 30px;
   }
- .my-gallery{
-   display: flex;
-   justify-content:center;
-   flex-direction:column;
- }
- img{
-   margin: 0 auto;
- }
+  .my-gallery {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  img {
+    margin: 0 auto;
+  }
 }
 </style>

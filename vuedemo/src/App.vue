@@ -35,10 +35,10 @@ vuedemo
         </v-btn>
       </router-link>
 
-      <router-link tag="div" to="/search" class="reset-height">
-        <v-btn value="search">
-          <span>搜索</span>
-          <v-icon>mdi-magnify</v-icon>
+      <router-link tag="div" to="/weather" class="reset-height">
+        <v-btn value="weather">
+          <span>天气</span>
+          <v-icon> mdi-white-balance-sunny</v-icon>
         </v-btn>
       </router-link>
 
@@ -91,8 +91,8 @@ export default {
         this.defaultBtn = "homepage";
       } else if (newVal === "/cart") {
         this.defaultBtn = "cart";
-      } else if (newVal === "/search") {
-        this.defaultBtn = "search";
+      } else if (newVal === "/weather") {
+        this.defaultBtn = "weather";
       } else if (newVal === "/account") {
         this.defaultBtn = "account";
       }
