@@ -25,14 +25,14 @@
           <v-list-item-icon>
             <v-icon>mdi-send</v-icon>
           </v-list-item-icon>
-          <v-list-item-subtitle v-if="loading">{{weatherList[index].wind_spd}} km/h</v-list-item-subtitle>
+          <v-list-item-subtitle v-if="loading">风速: {{weatherList[index].wind_spd}} km/h</v-list-item-subtitle>
         </v-list-item>
 
         <v-list-item>
           <v-list-item-icon>
             <v-icon>mdi-cloud-download</v-icon>
           </v-list-item-icon>
-          <v-list-item-subtitle v-if="loading">{{weatherList[index].hum}}%</v-list-item-subtitle>
+          <v-list-item-subtitle v-if="loading">相对湿度: {{weatherList[index].hum}}%</v-list-item-subtitle>
         </v-list-item>
 
         <v-slider v-model="time" :max="6" :tick-labels="labels" class="mx-4" ticks></v-slider>

@@ -118,7 +118,7 @@ export default {
   methods: {
     getFirstImg() {
       //请求第一张照片
-      console.log("调用第一个接口");
+      
       return this.axios.get(
         "api/pictures/random/?key=BingEverydayWallpaperPicture"
       );
