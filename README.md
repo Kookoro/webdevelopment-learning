@@ -112,7 +112,8 @@ mui
 
 2渲染图片列表数据
 ## 音乐播放组件
-1. 进度条组件
+1. 进度条组件`slide.vue`
+
 + 实现拖动进度条改变播放时间
 + 实现实时显示播放时间以及总时间
 + 实现环形进度条
@@ -135,6 +136,24 @@ mui
 
 ## 实现 图片详情页 缩略图功能 
 1. 使用第三方插件vue-preview
+   ```
+   import VuePreview from 'vue-preview'
+ 
+// defalut install
+Vue.use(VuePreview)
+ 
+// with parameters install
+Vue.use(preview, {
+  mainClass: 'pswp--minimal--dark',
+  barsSize: {top: 0, bottom: 0},
+  captionEl: false,
+  fullscreenEl: false,
+  shareEl: false,
+  bgOpacity: 0.85,
+  tapToClose: true,
+  tapToToggleControls: false
+})
+   ```
 2. 获取所有图片列表 v-for命令渲染
 3. foreach循环数组 给定宽高(每一个图片数组对象中需要w与h属性)
 4. image属性中的class属性不能去掉
