@@ -15,12 +15,7 @@
       </swiper>
     </div>
 
-    <!--     
-        <v-carousel hide-delimiters cycle :interval="interval" tag="div" >
-          <img :src="imgURL" class="loading" v-show="flag" />
-          <v-carousel-item v-for="item in imgList" :key="item" :src="item" @load="loadImage"></v-carousel-item>
-        </v-carousel>
-    -->
+  
   </div>
 </template>
 <script>
@@ -54,51 +49,14 @@ export default {
       }
     };
   },
-  created() {
-    // this.getAllImg();
-    
-  },
+ 
   methods: {
     
     setHeight() {
       let imgWidth = document.documentElement.clientWidth;
       console.log(imgWidth);
     },
-    // getFirstImg() {
-    //   console.log("调用第一个接口");
-    //   return this.axios.get(
-    //     "api/pictures/random/?key=BingEverydayWallpaperPicture"
-    //   );
-    // },
-
-    // getSecondImg() {
-    //   return this.axios.get("api/pictures/random/");
-    // },
-    // getThirdImg() {
-    //   console.log("调用第三个接口");
-    //   return this.axios.get("http://lorempixel.com/1600/900/");
-    // },
-    // getAllImg() {
-    //   var me = this;
-
-    //   this.axios.all([me.getFirstImg(), me.getSecondImg()]).then(
-    //     me.axios.spread(function(allTask, allCity) {
-    //       console.log("所有请求完成");
-    //       console.log("请求1结果", allTask);
-    //       console.log("请求2结果", allCity);
-
-    //       for (let i = 0; i < arguments.length; i++) {
-    //         if ((allTask.status === 200) & (allCity.status === 200)) {
-    //           me.url = "https://uploadbeta.com/" + arguments[i].config.url;
-
-    //           me.imgList.push(me.url);
-    //         } else {
-    //           Toast("获取轮播图失败");
-    //         }
-    //       }
-    //     })
-    //   );
-    // },
+   
     loadImage() {
       this.flag = false;
     }
