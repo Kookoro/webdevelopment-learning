@@ -230,7 +230,7 @@ export default {
       music.currentTime = music.duration * barWidth; // 计算点击时应播放所在的时间
       music.play(); // 播放音频
       this.play = true; // 更改播放暂停按钮为播放
-      this.downIcon = false;
+      this.downIcon = false; //更改图标
      
           
     },
