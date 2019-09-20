@@ -136,7 +136,8 @@ mui
 
 ## 实现 图片详情页 缩略图功能 
 1. 使用第三方插件vue-preview
-   ```
+   配置vue-preview
+```
 import VuePreview from 'vue-preview'
    Vue.use(preview, {
       mainClass: 'pswp--minimal--dark',
@@ -148,7 +149,9 @@ import VuePreview from 'vue-preview'
       tapToClose: true,
       tapToToggleControls: false
    })
-   ```
+```
+
+   
 2. 获取所有图片列表 v-for命令渲染
 3. foreach循环数组 给定宽高(每一个图片数组对象中需要w与h属性)
 4. image属性中的class属性不能去掉
