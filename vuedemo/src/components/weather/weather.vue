@@ -79,7 +79,7 @@ export default {
   },
   watch: {
     time(val) {
-      console.log(this.time);
+     
       this.index = this.time;
     }
   },
@@ -90,10 +90,9 @@ export default {
           "https://free-api.heweather.net/s6/weather/forecast?location=chongqing&key=0d347f7c994e4f8199162ed144123bd7"
         )
         .then(result => {
-          console.log(result);
-          console.log(result.data.HeWeather6[0].daily_forecast);
+          
           if (result.status === 200) {
-            console.log("ok");
+           
             const weekArray = new Array(
               "星期日",
               "星期一",
@@ -115,7 +114,7 @@ export default {
 
             this.city = result.data.HeWeather6[0].basic.location;
             this.updateLoc = result.data.HeWeather6[0].update.loc;
-            console.log(this.city);
+           
             this.weatherList = result.data.HeWeather6[0].daily_forecast;
             for (let d in this.weatherList) {
               this.forecast[d] = {
@@ -151,7 +150,7 @@ export default {
               }
             }
             this.loading = true;
-            console.log(this.forecast);
+           
           } else {
             console.log("error");
           }

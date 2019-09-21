@@ -73,7 +73,7 @@
     </v-app>
     <div>
       <div class="text-center">
-
+       
       </div>
     </div>
     <br />
@@ -103,7 +103,9 @@ export default {
   data() {
     return {
       swipeList: "",
-      imgList: [],
+      imgList: [
+        "http://api.dujin.org/bing/1920.php"
+      ],
       flag: true,
       imgURL: require("../../images/loading.gif"),
       playedTime: 0,
@@ -150,6 +152,12 @@ export default {
         })
       );
     },
+    //bing/1920.php
+    // getimage(){
+    //   this.axios.get("https://developers.douban.com/wiki/?title=guide").then(res=>{
+    //     console.log(res);
+    //   })
+    // },
 
     loadImage() {
       this.flag = false;
@@ -158,10 +166,6 @@ export default {
     
     
  
-    getValue() {
-      console.log(this.slider);
-      this.progress = this.slider;
-    }
 
   },
   

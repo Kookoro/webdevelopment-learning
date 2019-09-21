@@ -38,7 +38,7 @@ export default {
       this.axios
         .get("http://www.liulongbin.top:3005/api/getnew/" + this.id)
         .then(result => {
-          console.log(result);
+          
           if (result.data.status === 0) {
             this.newsinfo = result.data.message[0]; //如果没有失败将数据保存到data上
           } else {

@@ -41,7 +41,7 @@ export default {
       this.axios
         .get("http://www.liulongbin.top:3005/api/getimageInfo/" + this.id)
         .then(result => {
-          console.log(result);
+
           if (result.data.status === 0) {
             this.picInfo = result.data.message[0];
           }

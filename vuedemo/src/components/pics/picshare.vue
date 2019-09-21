@@ -57,7 +57,7 @@ export default {
       this.axios
         .get("http://www.liulongbin.top:3005/api/getimgcategory")
         .then(result => {
-          console.log(result);
+          
           if (result.data.status === 0) {
             //手动拼接完整的分类
             result.data.message.unshift({ title: "全部", id: 0 });
@@ -71,7 +71,7 @@ export default {
       this.axios
         .get("http://www.liulongbin.top:3005/api/getimages/" + cateId)
         .then(result => {
-          console.log(result);
+          
           if (result.data.status === 0) {
             this.picList = result.data.message;
           }

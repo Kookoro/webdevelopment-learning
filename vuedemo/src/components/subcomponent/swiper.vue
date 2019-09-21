@@ -54,7 +54,7 @@ export default {
     
     setHeight() {
       let imgWidth = document.documentElement.clientWidth;
-      console.log(imgWidth);
+     
     },
    
     loadImage() {
@@ -86,7 +86,7 @@ export default {
 .pic-cover {
   width: 100%;
   position: absolute;
-  z-index: 10;
+  z-index: 1;
 }
 .swiper-container{
   height: 100%;

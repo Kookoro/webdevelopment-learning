@@ -42,7 +42,7 @@ export default {
       this.axios
         .get("http://www.liulongbin.top:3005/api/getnewslist")
         .then(result => {
-          console.log(result);
+         
           if (result.data.status === 0) {
             this.newsList = result.data.message; //如果没有失败将数据保存到data上
           } else {

@@ -18,28 +18,28 @@
 
     <v-bottom-navigation v-model="defaultBtn" class="footer" color="#7659a0">
       <router-link tag="div" to="/homepage" class="reset-height">
-        <v-btn value="homepage">
+        <v-btn value="/homepage">
           <span>首页</span>
           <v-icon>mdi-home</v-icon>
         </v-btn>
       </router-link>
 
       <router-link tag="div" to="/weather" class="reset-height">
-        <v-btn value="weather">
+        <v-btn value="/weather">
           <span>天气</span>
           <v-icon>mdi-white-balance-sunny</v-icon>
         </v-btn>
       </router-link>
 
       <router-link tag="div" to="/cart" class="reset-height">
-        <v-btn value="cart">
+        <v-btn value="/cart">
           <span>购物车</span>
           <v-icon>mdi-cart</v-icon>
         </v-btn>
       </router-link>
 
       <router-link tag="div" to="/account" class="reset-height">
-        <v-btn value="account">
+        <v-btn value="/account">
           <span>用户</span>
           <v-icon>mdi-account</v-icon>
         </v-btn>
@@ -54,7 +54,7 @@ export default {
     return {
       showNav: true,
       message: "",
-      defaultBtn: "homepage",
+      defaultBtn:'/homepage',
       isHomePage: false,
       routeName: "homepage",
       expand: false
@@ -72,16 +72,9 @@ export default {
     }
   },
   watch: {
+    //后退时监听route 改变tabbar achieve状态
     "$route.path": function(newVal) {
-      if (newVal === "/homepage") {
-        this.defaultBtn = "homepage";
-      } else if (newVal === "/cart") {
-        this.defaultBtn = "cart";
-      } else if (newVal === "/weather") {
-        this.defaultBtn = "weather";
-      } else if (newVal === "/account") {
-        this.defaultBtn = "account";
-      }
+      this.defaultBtn =this.$route.path
     }
   },
   components: {

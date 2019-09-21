@@ -66,7 +66,7 @@ export default {
     },
    
     carthandleUp(status) {
-        console.log(this.max);
+       
       if (status) {
         if (this.cartValue >= this.max) {
           return;
@@ -131,7 +131,7 @@ export default {
     },
     cartHandleChange: function(event) {
       //对值进行验证
-      console.log(this.cartValue);
+   
       var val = this.cartValue;
       var max = this.$store.state.maxStock;
       var min = this.min;

@@ -94,7 +94,7 @@ export default {
       }
     },
     getProductlist() {
-      console.log("121");
+      
       var idArr = [];
       this.$store.state.cart.forEach(item => idArr.push(item.id));
       if (idArr.length <= 0) {

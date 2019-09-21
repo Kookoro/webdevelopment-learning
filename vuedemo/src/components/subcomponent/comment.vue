@@ -19,7 +19,7 @@
                   <v-list-item :key="item.index">
                     <template v-slot:default="{ active, toggle }">
                       <v-list-item-content>
-                        <v-listit-item-title v-text="item.user_name"></v-listit-item-title>
+                        <v-list-item-title v-text="item.user_name"></v-list-item-title>
                         <v-list-item-subtitle class="text--primary"><span class="commit">
                           {{item.content }}
                           </span></v-list-item-subtitle>
@@ -49,38 +49,6 @@ import { Toast } from "mint-ui";
 export default {
   data: () => ({
     page: 1,
-    // items: [
-    //   {
-    //     action: '2015-12-12',
-    //     headline: 'Brunch this weekend?',
-    //     title: 'Ali Connors',
-    //     subtitle: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
-    //   },
-    //   {
-    //     action: '2015-12-12',
-    //     headline: 'Summer BBQ',
-    //     title: 'me, Scrott, Jennifer',
-    //     subtitle: "Wish I could come, but I'm out of town this weekend.",
-    //   },
-    //   {
-    //     action: '2015-12-12',
-    //     headline: 'Oui oui',
-    //     title: 'Sandra Adams',
-    //     subtitle: 'Do you have Paris recommendations? Have you ever been?',
-    //   },
-    //   {
-    //     action: '2015-12-12',
-    //     headline: 'Birthday gift',
-    //     title: 'Trevor Hansen',
-    //     subtitle: 'Have any ideas about what we should get Heidi for her birthday?',
-    //   },
-    //   {
-    //     action: '2015-12-12',
-    //     headline: 'Recipe to try',
-    //     title: 'Britta Holt',
-    //     subtitle: 'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-    //   },
-    // ],
     pageIndex: 1, //页码
     comments: [], //所有的评论数据
     message: "" //评论输入的内容
@@ -99,7 +67,7 @@ export default {
             this.pageIndex
         )
         .then(result => {
-          console.log(result);
+        
           if (result.data.status === 0) {
             //获取更多评论时，将新获取的数据添加在旧数据之后，而不是覆盖
             this.comments = this.comments.concat(result.data.message);
