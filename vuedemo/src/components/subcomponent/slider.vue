@@ -65,7 +65,7 @@ export default {
 
   data() {
     return {
-      id:0,
+      id: 0,
       downIcon: true,
       cTime: "00:00", // 已播放时间
       dTime: "00:00", // 总播放时间
@@ -75,27 +75,22 @@ export default {
       slider: 40,
       downIcon: true,
       interval: 1000,
-      musicList:[
+      musicList: [
         {
-          url:"http://music.163.com/song/media/outer/url?id=666108.mp3"
+          url: "http://music.163.com/song/media/outer/url?id=666108.mp3"
         },
         {
-          url:"http://music.163.com/song/media/outer/url?id=27770723.mp3"
+          url: "http://music.163.com/song/media/outer/url?id=27770723.mp3"
         },
         {
-          url:"http://music.163.com/song/media/outer/url?id=34497243.mp3"
+          url: "http://music.163.com/song/media/outer/url?id=34497243.mp3"
         },
         {
-          url:"http://music.163.com/song/media/outer/url?id=454711161.mp3"
+          url: "http://music.163.com/song/media/outer/url?id=454711161.mp3"
         },
         {
-          url:"http://music.163.com/song/media/outer/url?id=439076801.mp3"
-        },
-      
-
-
-
-
+          url: "http://music.163.com/song/media/outer/url?id=439076801.mp3"
+        }
       ],
       audio1: {
         // 该字段是音频是否处于播放状态的属性
@@ -143,7 +138,7 @@ export default {
         const circleTime = musicTime / 360; // 计算总时长占据360度每一度的比例
         const stopTime = music.currentTime; // 获得已播放的音频时长
         const rightDeg = -135 + stopTime / circleTime; // 计算出当前旋转度数
-        
+
         if (rightDeg < 45) {
           // 如果当前度数小于45就证明在右边
           rightCircle.display = "block"; // 显示右边圆
@@ -170,20 +165,16 @@ export default {
         } else {
           this.cTime = `${branch}:${second}`;
         }
-        if(stopTime == musicTime)
-        {
-           if(this.id>=this.musicList.length-1){
-              this.id=0;
-               
-              this.switchAudio('bottom');
-            }
-            else{
-              this.id++;
-               
-              this.switchAudio('bottom');
+        if (stopTime == musicTime) {
+          if (this.id >= this.musicList.length - 1) {
+            this.id = 0;
 
-            }
-          
+            this.switchAudio("bottom");
+          } else {
+            this.id++;
+
+            this.switchAudio("bottom");
+          }
         }
       },
       { passive: true }
@@ -231,8 +222,6 @@ export default {
       music.play(); // 播放音频
       this.play = true; // 更改播放暂停按钮为播放
       this.downIcon = false; //更改图标
-     
-          
     },
 
     // 点击播放暂停按钮时间
@@ -252,21 +241,18 @@ export default {
     switchAudio(value) {
       const music = this.$refs.player;
       if (value === "top") {
-       if(this.id<=0)
-       {
-         this.id = this.musicList.length-1;
-         this.downIcon = !false;
-       }
-       else{
-         this.id--;
-         this.downIcon = !false;
-
-       }
+        if (this.id <= 0) {
+          this.id = this.musicList.length - 1;
+          this.downIcon = !false;
+        } else {
+          this.id--;
+          this.downIcon = !false;
+        }
       } else if (value === "bottom") {
         this.id++;
         this.downIcon = !false;
       }
-      
+
       this.play = false; // 播放按钮为暂停
       this.$refs.runbar.style.width = 0; // 清空颜色进度条
       this.$refs.yuanright.style.display = "none"; // 清空圆形颜色进度条
@@ -293,8 +279,7 @@ export default {
           this.isStore = true;
           this.progress = 0;
           this.downIcon = true;
-           
-           
+
           clearInterval(timer);
         }
       }, 30);
