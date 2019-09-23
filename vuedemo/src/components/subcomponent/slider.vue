@@ -258,6 +258,7 @@ export default {
       this.$refs.yuanright.style.display = "none"; // 清空圆形颜色进度条
       this.$refs.yuanleft.style.display = "none"; // 清空圆形颜色进度条
     },
+    //切换图标状态
     changeStart() {
       this.isStore = !this.isStore;
       const audio = document.getElementById("audio");

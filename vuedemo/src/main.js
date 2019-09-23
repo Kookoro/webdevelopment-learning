@@ -17,11 +17,16 @@ import {
 Vue.component(Header.name, Header)
 import {
     Swipe,
-    SwipeItem
+    SwipeItem,
+    IndexList, IndexSection,
+    Cell
 } from 'mint-ui'; //mint-ui轮播图
 
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(IndexList.name, IndexList);
+Vue.component(IndexSection.name, IndexSection);
+Vue.component(Cell.name, Cell);
 import {
     Button
 } from 'mint-ui';

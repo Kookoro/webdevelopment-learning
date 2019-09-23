@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="weather-container">
     <v-app>
       <v-card class="mx-auto" color="#F9F9F9" width="100%" min-width="320">
         <v-list-item two-line>
@@ -51,14 +51,38 @@
 
         <v-divider></v-divider>
 
-        <v-card-actions>
-          <v-btn text>Full Report</v-btn>
-        </v-card-actions>
+      
       </v-card>
     </v-app>
+  <v-card-actions>
+           <v-row justify="center">
+    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" >
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+      </template>
+      <v-card>
+        <v-toolbar dark color="#6e5b98">
+          <v-btn icon dark @click="dialog = false">
+            <v-icon @click="show">mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>选择城市</v-toolbar-title>
+          <div class="flex-grow-1"></div>
+       
+        </v-toolbar>
+             
+        <v-divider></v-divider>
+      
+      </v-card>
+    </v-dialog>
+  </v-row>
+        </v-card-actions>
+          <selectcity></selectcity>
   </div>
+  
 </template>
+
 <script>
+import selectcity from '../subcomponent/selectcity.vue'
 export default {
   data() {
     return {
@@ -69,7 +93,8 @@ export default {
       city: "",
       index: 0,
       loading: false,
-      updateLoc: ""
+      updateLoc: "",
+       dialog: false,
     };
   },
   created() {
@@ -155,9 +180,24 @@ export default {
             console.log("error");
           }
         });
+    },
+    show(){
+      console.log("1");
     }
+  },
+  components:{
+    selectcity,
   }
 };
 </script>
 <style lang="scss" scoped>
+.weather-container{
+  margin-bottom: 56px;
+}
+.v-application ul{
+  
+}
+.mint-indexlist-nav{
+  position: fixed
+}
 </style>

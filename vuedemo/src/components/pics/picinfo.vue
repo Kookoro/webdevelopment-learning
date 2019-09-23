@@ -8,7 +8,7 @@
     <v-divider></v-divider>
     <!-- 缩略图区域  -->
     <div class="preview-container">
-      <vue-preview :slides="list" @close="handleClose"></vue-preview>
+      <vue-preview :slides="list"></vue-preview>
     </div>
     <!-- 图片内容区域 -->
     <div class="content display-4" v-html="picInfo.content"></div>
@@ -33,9 +33,7 @@ export default {
     this.getThumbs();
   },
   methods: {
-    handleClose() {
-      console.log("close event");
-    },
+   
     getPicInfo() {
       //获取图片详情、
       this.axios

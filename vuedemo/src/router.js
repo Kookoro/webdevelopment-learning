@@ -72,7 +72,9 @@ var router = new VueRouter({
       name:'/homepage/productcomment',
       component:ProductComment,
       
-    }
+    },
+   
+    
 
  
   ] 

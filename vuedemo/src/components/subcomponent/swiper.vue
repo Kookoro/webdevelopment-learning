@@ -45,8 +45,10 @@ export default {
         },
         spaceBetween: 30,
 
-        loop: true
-      }
+        loop: true,
+       
+      },
+       
     };
   },
  
@@ -68,6 +70,11 @@ export default {
       return window.innerWidth * 0.5625 + "px";
     }
   },
+  // watch: {
+  //   'window.innerWidth':function (newVal) { 
+  //     this.scrollerHeight = window.innerWidth * 0.5625 + "px";
+  //    }
+  // },
   components: {
     swiper,
     swiperSlide
