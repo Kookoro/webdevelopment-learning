@@ -143,9 +143,9 @@ module.exports = {
             "vue$": 'vue/dist/vue.js'
         } 
     },
-    externals: {
-        'Vue': 'Vue'
-      }
+    // externals: {
+    //     'Vue': 'Vue'
+    //   }
 
 
 

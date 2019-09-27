@@ -47,7 +47,14 @@
 
     <div class="checkstand">
       <div class="select-all">
-        <v-checkbox label="全选" color="#6e5b98" v-model="isChecked" hide-details @change="selectAll"></v-checkbox>
+        <v-checkbox
+          label="全选"
+          color="#6e5b98"
+          v-model="isChecked"
+          hide-details
+          @change="selectAll"
+          :disabled="emptyCart"
+        ></v-checkbox>
       </div>
       <div class="rightplace">
         <div class="total-price">
@@ -61,11 +68,14 @@
         </div>
       </div>
     </div>
+    <backtotop class="fix-height"></backtotop>
   </div>
 </template>
 <script>
 // import numberbox from "../subcomponent/numberbox.vue";
-const numberbox =()=> import('../subcomponent/numberbox.vue')
+const numberbox = () => import("../subcomponent/numberbox.vue");
+const backtotop = () => import("../subcomponent/backtotop.vue");
+import { Toast } from "mint-ui";
 export default {
   data() {
     return {
@@ -77,19 +87,37 @@ export default {
       cartactive: true,
       checked: false,
       isChecked: false,
-      
+      emptyCart: false
     };
   },
   created() {
     this.getProductlist();
+    this.checkInitializeSelect();
   },
   // computed: {
   //   scrollerHeight: function() {
   //     return window.innerHeight+'px'
   //   }
   // },
+  watch: {
+    //后退时监听route 改变tabbar achieve状态
+    "$store.state.cart.length": function(newVal) {
+      //添加购物车后，将全选按钮激活
+      if (newVal > 0) {
+        this.emptyCart = false;
+      }
+    }
+  },
   methods: {
+    checkInitializeSelect() {
+      //检查全选按钮初始化状态
+      if (this.$store.state.cart.length === 0) {
+        this.isChecked = false;
+        this.emptyCart = true;
+      }
+    },
     checkAllChange() {
+      //全选按钮选中
       if (
         this.$store.state.cart.findIndex(target => target.checked === false) ===
         -1
@@ -99,9 +127,9 @@ export default {
         this.isChecked = false;
       }
     },
-  
+
     getProductlist() {
-      
+      //请求商品列表
       var idArr = [];
       this.$store.state.cart.forEach(item => idArr.push(item.id));
       if (idArr.length <= 0) {
@@ -119,14 +147,23 @@ export default {
         });
     },
     remove(id, index) {
-      //删除
+      //删除商品
       this.productList.splice(index, 1);
       this.$store.commit("removeFromCart", id);
     },
     checkedChanged(id, val) {
+      //更新商品数量
       this.$store.commit("updateProductChecked", { id, checked: val });
     },
     selectAll() {
+      //全选逻辑
+      if (this.$store.state.cart.length === 0) {
+        Toast({
+          message: "似乎您购物车是空的呢",
+          iconClass: "mdi mdi-error"
+        });
+      }
+
       if (
         this.$store.state.cart.findIndex(target => target.checked === false) ===
         -1
@@ -147,7 +184,8 @@ export default {
     }
   },
   components: {
-    numberbox
+    numberbox,
+    backtotop
   }
 };
 </script>
@@ -311,6 +349,7 @@ export default {
         margin-right: 0.4em;
       }
     }
+    
   }
 }
 </style>  
