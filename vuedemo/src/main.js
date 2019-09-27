@@ -18,7 +18,8 @@ Vue.component(Header.name, Header)
 import {
     Swipe,
     SwipeItem,
-    IndexList, IndexSection,
+    IndexList,
+    IndexSection,
     Cell
 } from 'mint-ui'; //mint-ui轮播图
 
@@ -80,14 +81,14 @@ const store = new Vuex.Store({
         //this.$store.state.xxx
         count: 0,
         cart: cart,
-            //将购物车中的数据用数组保存
-            //id 
-            //conut 数量
-            //price 价格
-            //checked 是否结算 
-        
+        //将购物车中的数据用数组保存
+        //id 
+        //conut 数量
+        //price 价格
+        //checked 是否结算 
+
         maxStock: '',
-      
+
     },
     mutations: {
         //操作store中的值，需要调用mutations中的值，不推荐使用$stote.state直接调用
@@ -140,21 +141,21 @@ const store = new Vuex.Store({
             })
             localStorage.setItem('cart', JSON.stringify(state.cart))
         },
-        updateProductChecked(state,info){
-            state.cart.some(item=>{
-                if(item.id == info.id){
+        updateProductChecked(state, info) {
+            state.cart.some(item => {
+                if (item.id == info.id) {
                     item.checked = info.checked
                 }
-            }) 
+            })
             localStorage.setItem('cart', JSON.stringify(state.cart))
         },
-        checkAll(state,data){
-            this.state.cart.some(item=>{
+        checkAll(state, data) {
+            this.state.cart.some(item => {
                 item.checked = data;
             })
             localStorage.setItem('cart', JSON.stringify(state.cart))
         },
-       
+
     },
     getters: {
         getAllCount(state) {
@@ -171,20 +172,20 @@ const store = new Vuex.Store({
             })
             return o;
         },
-        getProductChecked(state){
+        getProductChecked(state) {
             var o = {}
-            state.cart.forEach(item=>{
+            state.cart.forEach(item => {
                 o[item.id] = item.checked;
             })
             return o;
         },
-        getProductCountAndAmount(state){
+        getProductCountAndAmount(state) {
             var e = {
-                count:0,
-                amount:0,
+                count: 0,
+                amount: 0,
             }
-            state.cart.forEach(item=>{
-                if(item.checked){
+            state.cart.forEach(item => {
+                if (item.checked) {
                     e.count += item.count
                     e.amount += item.price * item.count
                 }
