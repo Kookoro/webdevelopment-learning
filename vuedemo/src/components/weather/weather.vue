@@ -195,7 +195,7 @@ export default {
   margin-bottom: 56px;
 }
 .v-application ul{
-  
+  padding-left: 0;
 }
 .mint-indexlist-nav{
   position: fixed

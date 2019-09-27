@@ -20,11 +20,11 @@
   </div>
 </template>
 <script>
-import imgUrl from "../../images/menu1.png";
+
 export default {
   data() {
     return {
-      imgUrl,
+      
       pageindex: 1, //分页的页数
       productlist: [], //存放商品列表的数组
       errorImg:'this.src="' + require('../../images/imgloaderror.jpeg') + '"'

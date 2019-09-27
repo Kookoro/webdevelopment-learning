@@ -280,7 +280,6 @@ export default {
           this.isStore = true;
           this.progress = 0;
           this.downIcon = true;
-
           clearInterval(timer);
         }
       }, 30);
@@ -402,5 +401,11 @@ export default {
   .v-btn-toggle {
     background-color: #6e5b98;
   }
+}
+.v-application--is-ltr .v-list-item__action:first-child, .v-application--is-ltr .v-list-item__icon:first-child{
+  margin-right: 10px;
+}
+.v-list-item__action:last-of-type:not(:only-child), .v-list-item__avatar:last-of-type:not(:only-child), .v-list-item__icon:last-of-type:not(:only-child){
+  margin-left: 10px;
 }
 </style>

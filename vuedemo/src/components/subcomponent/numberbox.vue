@@ -1,6 +1,6 @@
 <!-- 加减框组件 -->
 <template>
-  <div>
+  <div class="apply-box" id="apply">
     <v-btn
       text
       @click="carthandleDown(cartactive);handleDown(picactive);sendMsgToParent()"
@@ -29,6 +29,21 @@ export default {
       currentValue: this.value,
       cartValue: this.initcount
     };
+  },
+  created() {
+     var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+    window.onresize = function() {
+        var nowClientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        if (clientHeight - nowClientHeight > 60 ) {//因为ios有自带的底部高度
+            //键盘弹出的事件处理
+            document.getElementById("apply").classList.add("focusState");
+        }
+        else {
+            //键盘收起的事件处理
+        	document.getElementById("apply").classList.remove("focusState");
+        } 
+    };
+
   },
   watch: {
     currentValue: function(val) {
@@ -170,4 +185,5 @@ input {
 .show {
   display: none;
 }
+
 </style>

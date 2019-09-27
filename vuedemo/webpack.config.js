@@ -24,10 +24,11 @@ module.exports = {
     devServer: {
         //这是配置dev-server 命令参数的第二种形式，此方式相对麻烦些
         open: true, //自动打开浏览器
-        port: 8080, //设置启动时运行端口 
+        port: 8000, //设置启动时运行端口 
         //指定托管的根目录
         hot: true, //启用热更新第一步 
         publicPath: '/',
+        host:'192.168.253.4',
         proxy: {
             '/api': {
                 target: "https://uploadbeta.com", // 需要跨域访问的地址
@@ -140,8 +141,11 @@ module.exports = {
     resolve: {
         alias: {
             "vue$": 'vue/dist/vue.js'
-        }
-    }
+        } 
+    },
+    externals: {
+        'Vue': 'Vue'
+      }
 
 
 

@@ -64,7 +64,8 @@
   </div>
 </template>
 <script>
-import numberbox from "../subcomponent/numberbox.vue";
+// import numberbox from "../subcomponent/numberbox.vue";
+const numberbox =()=> import('../subcomponent/numberbox.vue')
 export default {
   data() {
     return {
@@ -75,13 +76,18 @@ export default {
       productList: [],
       cartactive: true,
       checked: false,
-      isChecked: false
+      isChecked: false,
+      
     };
   },
   created() {
     this.getProductlist();
   },
-
+  // computed: {
+  //   scrollerHeight: function() {
+  //     return window.innerHeight+'px'
+  //   }
+  // },
   methods: {
     checkAllChange() {
       if (
@@ -93,6 +99,7 @@ export default {
         this.isChecked = false;
       }
     },
+  
     getProductlist() {
       
       var idArr = [];
@@ -147,7 +154,7 @@ export default {
 <style lang="scss">
 .cart-container {
   padding-top: 20px;
-
+  min-height: 1000px;
   margin-bottom: 112px;
   padding-bottom: 10px;
 

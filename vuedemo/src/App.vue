@@ -1,7 +1,7 @@
 <template>
   <div class="app-container" id="scrollWrap">
     <div>
-      <v-app-bar color="#725a9c" height="45px" fixed>
+      <v-app-bar color="#725a9c" height="45px" class="fix-zindex">
         <div class="my-2">
           <v-btn class="title" text normal color="primary" @click="goback" :disabled="isHomePage">
             <v-icon>mdi-chevron-left</v-icon>vuedemo
@@ -10,6 +10,7 @@
 
         <v-spacer></v-spacer>
       </v-app-bar>
+      <div style="width:100%;height:45px;"></div>
     </div>
 
     <transition name="fade" mode="out-in">
@@ -95,16 +96,21 @@ body {
 .card {
   position: absolute;
 }
+.fix-zindex{
+  position: fixed;
+  z-index: 10;
+  top: 0;
+}
 .app-container {
   overflow-x: auto;
-  margin-top: 45px;
+  margin-bottom: 45px;
 }
 
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 10;
+  z-index:10;
 }
 
 .reset-height {

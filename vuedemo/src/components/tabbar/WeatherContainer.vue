@@ -4,7 +4,8 @@
   </div>
 </template>
 <script>
-import weather from "../weather/weather.vue";
+// import weather from "../weather/weather.vue";
+const weather = ()=>import('../weather/weather.vue')
 export default {
   data() {
     return {};
