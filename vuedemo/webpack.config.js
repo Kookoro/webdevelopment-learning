@@ -28,7 +28,7 @@ module.exports = {
         //指定托管的根目录
         hot: true, //启用热更新第一步 
         publicPath: '/',
-        host:'192.168.253.4',
+        // host:'192.168.253.4',移动端调试host
         proxy: {
             '/api': {
                 target: "https://uploadbeta.com", // 需要跨域访问的地址

@@ -96,7 +96,7 @@ export default {
         )
         .then(result => {
           if (result.data.status === 0) {
-            //拼接出一个评论对象
+            //拼接一个评论对象
             var cmt = {
               user_name: "匿名用户",
               add_time: Date.now(),

@@ -1,4 +1,6 @@
-import { pinyin } from './const.js'
+import {
+  pinyin
+} from './const.js'
 export default {
   chineseToPinYin: function (l1) {
     var l2 = l1.length

@@ -69,7 +69,7 @@ import router from './router.js';
 
 //导入axios插件
 import axios from 'axios';
-Vue.prototype.axios = axios;
+Vue.prototype.axios = axios
 
 import preview from 'vue-preview';
 
