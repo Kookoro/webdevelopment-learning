@@ -18,7 +18,7 @@
     "default-passive-events": "^1.0.10",
     "fibers": "^4.0.1",
     "img-loader": "^3.0.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mint-ui": "^2.2.13",
     "moment": "^2.24.0",
     "popper.js": "^1.15.0",
